@@ -11,16 +11,35 @@
                 <div class="article-content">
                     <span>{{ item.articleContent }}</span>
                 </div>
+                <div class="article-info">
+                    <div class="created-at">
+                        <Icon>
+                            <FieldTimeOutlined></FieldTimeOutlined>
+                        </Icon>
+                        <span>{{ formatTime(item.createdAt) }}</span>
+
+                    </div>
+                    <div class="view-count">
+                        <Icon>
+                            <EyeOutlined></EyeOutlined>
+                        </Icon>
+                        <span>{{ item.viewCount }}</span>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
+import { Icon } from '@vicons/utils'
 import { onMounted, onUnmounted, ref, nextTick, watch } from "vue";
 import { getArticleListApi } from "../api/ArticleApi";
 import { getRandomInt } from "../utils";
-
+import { EyeOutlined, FieldTimeOutlined } from '@vicons/antd'
+import { formatTime } from '../utils/index'
+import { count } from 'console';
 interface Article {
     articleContent: string,
     articleCover: string,
@@ -29,7 +48,7 @@ interface Article {
     category: {
         categoryName: string
     },
-    createdAt: string
+    createdAt: Date
     isTop: number
     tagList: { tagId: number, tagName: number }[],
     viewCount: number,
@@ -56,8 +75,9 @@ const scrollFn = () => {
             document.documentElement.scrollHeight || document.body.scrollHeight;
         /* 这里提示：当 windowHeight + st >= scrollHeight  时就表示滚到底了。 */
         if (st + windowHeight >= scrollHeight - 10) {
-            articleInfo.value.currentPage++
-
+            if (!loadAll) {
+                articleInfo.value.currentPage++
+            }
         }
     }, 200);
 };
@@ -68,6 +88,7 @@ const articleInfo = ref({
     currentPage: 1,
     searchText: ''
 })
+let loadAll = false
 const init = async () => {
     const { data: res } = await getArticleListApi<Article>(articleInfo.value.pageSize,
         articleInfo.value.currentPage, articleInfo.value.searchText)
@@ -81,14 +102,19 @@ const init = async () => {
 }
 watch(() => articleInfo, () => {
     getArticleListApi<Article>(articleInfo.value.pageSize, articleInfo.value.currentPage, articleInfo.value.searchText).then(data => {
+
         data.data.rows.forEach(item => {
             item.height = getRandomInt(100, 200)
 
         })
         articleList.value?.push(...data.data.rows)
+        if (articleList.value?.length! >= data.data.count) {
+            loadAll = true
+        }
         nextTick(() => {
             generate((articleInfo.value.currentPage - 1) * articleInfo.value.pageSize, articleList.value?.length!)
         })
+
     })
 }, { deep: true })
 
@@ -137,7 +163,6 @@ onUnmounted(() => {
         background-color: white;
         position: absolute;
         width: 30%;
-        border: 1px solid black;
 
         .image-container {
 
@@ -160,6 +185,7 @@ onUnmounted(() => {
 
             .article-content {
                 margin: 8px 0;
+
                 span {
                     font-weight: 500;
                     font-size: 15px;
@@ -168,6 +194,15 @@ onUnmounted(() => {
                     overflow: hidden;
                     -webkit-line-clamp: 1;
                     text-overflow: ellipsis;
+                }
+            }
+
+            .article-info {
+                display: flex;
+                justify-content: space-between;
+
+                span {
+                    margin-left: 10px;
                 }
             }
         }
