@@ -3,22 +3,24 @@ import { RouteItem } from "@/router/types";
 import { Menu } from "antd";
 import MenuItem from "antd/lib/menu/MenuItem";
 import SubMenu from "antd/lib/menu/SubMenu";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-
-function index(props: any) {
+type IProps={
+  collapsed:boolean
+}
+const index:React.FC<IProps>=({collapsed})=> {
   const navigate = useNavigate();
   const location = useLocation();
   const [openKey, setOpenKey] = useState<string[]>([
     "/" + location.pathname.split("/")[1],
   ]);
   useEffect(() => {
-    if (props.collapsed) {
+    if (collapsed) {
       setOpenKey([]);
     } else {
       setOpenKey(["/" + location.pathname.split("/")[1]]);
     }
-  }, [props.collapsed]);
+  }, [collapsed]);
   const generate = (route: any) => {
     return route.children!.map((r: RouteItem) => {
       if (r.children) {
@@ -46,6 +48,7 @@ function index(props: any) {
             title={r.label}
             onClick={(e) => {
               navigate(r.key!);
+              if(collapsed) setOpenKey([])
             }}
           >
             {r.label}

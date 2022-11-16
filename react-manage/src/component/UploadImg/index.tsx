@@ -3,11 +3,13 @@ import { message, Upload } from "antd";
 import React, { useEffect, useState } from "react";
 const { Dragger } = Upload;
 
-const App: React.FC<{ src?: string }> = (prop) => {
-  const props = {
+const App: React.FC<{ src?: string }> = ({ src }) => {
+  console.log(src);
+
+  const config = {
     name: "file",
     multiple: false,
-    action: "http://101.43.180.21:3000/upload",
+    action: "http://localhost:3000/upload",
     onChange(info: any) {
       const { status } = info.file;
       console.log("info", info);
@@ -28,10 +30,12 @@ const App: React.FC<{ src?: string }> = (prop) => {
   };
 
   return (
-    <Dragger {...props} {...prop} maxCount={1}>
-      {prop.src === undefined ? (
+    <Dragger {...config} maxCount={1}>
+      {src ? (
+        <img src={src} style={{ width: "390px", height: "141px" }} />
+      ) : (
         <>
-          <p className="ant-upload-drag-icon">  
+          <p className="ant-upload-drag-icon">
             <InboxOutlined />
           </p>
           <p className="ant-upload-text">
@@ -42,8 +46,6 @@ const App: React.FC<{ src?: string }> = (prop) => {
             uploading company data or other band files
           </p>
         </>
-      ) : (
-        <img src={prop.src} style={{ width: "390px", height: "141px" }} />
       )}
     </Dragger>
   );

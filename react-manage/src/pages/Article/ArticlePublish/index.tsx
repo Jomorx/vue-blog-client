@@ -79,7 +79,10 @@ function index() {
           },
         ],
         valuePropName: "src",
+        // valuePropName: "fileList",
         getValueFromEvent: (e: any) => {
+          console.log("formValue",e);
+          
           console.log("Upload event:", e.file.status);
           if (e.file.status === "done") {
             return e?.file.response[0].src;
@@ -93,10 +96,12 @@ function index() {
         type: "switch",
         rules: [
           {
-            required: false,
+            required: true,
           },
         ],
+        getValueFromEvent: (isSwitch) =>isSwitch?1:0,
         valuePropName: "checked",
+        initialValue:initValue?.isTop
       },
     ],
     title: "发布文章",
@@ -114,7 +119,7 @@ function index() {
   const init = async () => {
     if(JSON.stringify(param) !== '{}'){
       const res = await getArticleByIdApi(param.id);
-      setInitValue(res as any);
+      setInitValue(res);
     }
 
   };

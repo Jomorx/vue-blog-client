@@ -17,9 +17,9 @@ const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
   //没有token重定向到登录
-  useEffect(() => {
-    getToken() || navigate("/login");
-  }, []);
+  // useEffect(() => {
+  //   getToken() || navigate("/login");
+  // }, []);
   return (
     <Layout className={style.layout}>
       <div

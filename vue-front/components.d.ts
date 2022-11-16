@@ -7,15 +7,9 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    CommonContent: typeof import('./src/components/CommonContent.vue')['default']
-    CommonHeader: typeof import('./src/components/CommonHeader.vue')['default']
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     NButton: typeof import('naive-ui')['NButton']
-    NCard: typeof import('naive-ui')['NCard']
     NInput: typeof import('naive-ui')['NInput']
-    NMenu: typeof import('naive-ui')['NMenu']
     NNumberAnimation: typeof import('naive-ui')['NNumberAnimation']
-    NScrollbar: typeof import('naive-ui')['NScrollbar']
     NSpace: typeof import('naive-ui')['NSpace']
     NTimeline: typeof import('naive-ui')['NTimeline']
     NTimelineItem: typeof import('naive-ui')['NTimelineItem']

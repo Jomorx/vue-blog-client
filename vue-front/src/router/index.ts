@@ -9,6 +9,7 @@ const routes:RouteRecordRaw[] = [
     { path: '/log', name: '', component: () => import('../pages/Log.vue') },
     { path: '/about', name: '', component: () => import('../pages/About.vue') },
     { path: '/friendChain', component: () => import('../pages/FriendChain.vue') },
+    {path:'/article',component:()=>import('../pages/Article.vue')}
 ]
 const router = createRouter({
     history: createWebHistory(),
