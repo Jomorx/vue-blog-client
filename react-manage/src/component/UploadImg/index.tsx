@@ -1,24 +1,20 @@
 import { InboxOutlined } from "@ant-design/icons";
-import { message, Upload } from "antd";
+import { FormInstance, message, Upload } from "antd";
 import React, { useEffect, useState } from "react";
 const { Dragger } = Upload;
 
-const App: React.FC<{ src?: string }> = ({ src }) => {
-  console.log(src);
-
+const App: React.FC<{ src?: string}> = (props) => {
+  const [src,setSrc] = useState<string|undefined>(props.src)  
   const config = {
     name: "file",
     multiple: false,
     action: "http://localhost:3000/upload",
     onChange(info: any) {
       const { status } = info.file;
-      console.log("info", info);
-      if (status !== "uploading") {
-        console.log(info.file, info.fileList);
-      }
-
       if (status === "done") {
         message.success(`${info.file.name} file uploaded successfully.`);
+        setSrc(info.file.response[0].src)
+
       } else if (status === "error") {
         message.error(`${info.file.name} file upload failed.`);
       }
@@ -30,9 +26,9 @@ const App: React.FC<{ src?: string }> = ({ src }) => {
   };
 
   return (
-    <Dragger {...config} maxCount={1}>
+    <Dragger {...config}{...props} maxCount={1}>
       {src ? (
-        <img src={src} style={{ width: "390px", height: "141px" }} />
+        <img src={props.src} style={{ width: "390px", height: "141px" }} />
       ) : (
         <>
           <p className="ant-upload-drag-icon">

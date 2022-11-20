@@ -1,6 +1,6 @@
 <template>
     <div class="home-container" ref="home">
-        <div v-for="item in articleList" class="article-container" ref="articles">
+        <div v-for="item in articleList" @click="handlerClickArticle(item.articleId)" class="article-container" ref="articles">
             <div class="image-container">
                 <img :src="item.articleCover" alt="" lazy :style="{ height: item.height + 'px' }" />
             </div>
@@ -40,7 +40,10 @@ import { getRandomInt } from "../utils";
 import { EyeOutlined, FieldTimeOutlined } from '@vicons/antd'
 import { formatTime } from '../utils/index'
 import { count } from 'console';
-interface Article {
+import { useRouter } from 'vue-router';
+const router  = useRouter()
+export type Article= {
+    articleId:number
     articleContent: string,
     articleCover: string,
     articleId: string,
@@ -54,8 +57,13 @@ interface Article {
     viewCount: number,
     height: number
 }
-let timer: any = null
+let timer: NodeJS.Timer = null
 const articleList = ref<Article[]>()
+
+const handlerClickArticle = (id:number)=>{
+    router.push(`/article/${id}`)
+}
+
 const scrollFn = () => {
     if (timer) {
         clearTimeout(timer)
@@ -163,7 +171,7 @@ onUnmounted(() => {
         background-color: white;
         position: absolute;
         width: 30%;
-
+        cursor: pointer;
         .image-container {
 
             img {

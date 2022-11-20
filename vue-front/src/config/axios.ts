@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from "axios";
 import nprogress from "nprogress";
 import "nprogress/nprogress.css";
 const request: AxiosInstance = axios.create({
-  baseURL: "http://101.43.180.21:3000",
+  baseURL: "http://localhost:3000",
   timeout: 6000,
 });
 

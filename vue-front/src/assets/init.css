@@ -177,7 +177,7 @@ input::-moz-focus-inner {
 }
 
 /* 标题元素样式清除, 让标题都自定义, 适应多个系统应用 */
-h1,
+/* h1,
 h2,
 h3,
 h4,
@@ -185,7 +185,7 @@ h5,
 h6 {
     font-size: 100%;
     font-weight: normal;
-}
+} */
 
 a {
     text-decoration: none;

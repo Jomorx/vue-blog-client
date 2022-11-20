@@ -1,4 +1,6 @@
+import { RouteItem } from "@/router/types";
 import moment from "moment";
+import MenuItem from "_antd@4.21.6@antd/lib/menu/MenuItem";
 
 //全屏
 export const fullScreen = () => {
@@ -6,7 +8,7 @@ export const fullScreen = () => {
   const rfs = el.requestFullscreen;
   if (typeof rfs != "undefined" && rfs) {
     rfs.call(el);
-  } 
+  }
   // else if (typeof (window as any).ActiveXObject != "undefined") {
   //   // for Internet Explorer
   //   const wscript = new ActiveXObject("WScript.Shell");
@@ -21,6 +23,6 @@ export const formatTime = (time: Date) => {
   return moment(time).format("YYYY-MM-DD");
 };
 
-export const getToken = ():string => localStorage.getItem("token")!;
-export const setToken = (token: string) => localStorage.setItem('token',token);
+export const getToken = (): string => localStorage.getItem("token")!;
+export const setToken = (token: string) => localStorage.setItem("token", token);
 export const removeToken = () => localStorage.removeItem("token");

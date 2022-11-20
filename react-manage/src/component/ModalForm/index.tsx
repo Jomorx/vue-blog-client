@@ -15,7 +15,7 @@ const switchRender = (type: string, item: FormItem, form: any) => {
       return <Input type="textarea"></Input>;
     }
     case "upload": {
-      return <UploadImg></UploadImg>;
+      return <UploadImg />;
     }
     case "ButtonWithPopover": {
       return item.popoverItem!(item, form);
@@ -23,11 +23,6 @@ const switchRender = (type: string, item: FormItem, form: any) => {
     case "switch": {
       return (
         <Switch
-          // onChange={(checked, e) => {
-          //   form.setFieldsValue({
-          //     isTop: checked ? 1 : 0,
-          //   });
-          // }}
         ></Switch>
       );
     }
@@ -43,15 +38,13 @@ const CollectionCreateForm: React.FC<IProps> = ({ visible, ModalInfo }) => {
       okText="确定"
       cancelText="取消"
       onCancel={ModalInfo.onCancel}
-      // forceRender
       onOk={() => {
         form
           .validateFields()
-          .then((values) => {
+          .then(async (values) => {
             console.log(values);
-            
-            // form.resetFields();
-            // ModalInfo.onCreate(values);
+            await ModalInfo.onCreate(values);
+            form.resetFields();
           })
           .catch((info) => {
             console.log("Validate Failed:", info);
@@ -63,6 +56,7 @@ const CollectionCreateForm: React.FC<IProps> = ({ visible, ModalInfo }) => {
         form={form}
         layout="horizontal"
         name="form_in_modal"
+        
       >
         {ModalInfo.formItem.map((item: FormItem) => {
           return (

@@ -78,15 +78,12 @@ function index() {
             message: "请上传封面",
           },
         ],
-        valuePropName: "src",
-        // valuePropName: "fileList",
-        getValueFromEvent: (e: any) => {
-          console.log("formValue",e);
-          
+        valuePropName:"src",
+        getValueFromEvent: (e: any) => {          
           console.log("Upload event:", e.file.status);
-          if (e.file.status === "done") {
-            return e?.file.response[0].src;
-          }
+            console.log("src",e);
+            if(e.file.status==="done")
+            return e.file.response[0].src;
         },
         initialValue: initValue?.articleCover,
       },

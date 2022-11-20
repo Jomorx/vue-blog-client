@@ -1,4 +1,4 @@
-import { Layout, Avatar, Popover, Divider } from "antd";
+import { Layout, Avatar, Popover } from "antd";
 import Menu from "@/component/Menu";
 import Breadcrumb from "@/component/Breadcrumb";
 import {
@@ -12,6 +12,7 @@ import style from "./index.module.less";
 const { Header, Sider, Content } = Layout;
 import { fullScreen, getToken, removeToken } from "@/utils";
 import { Suspense } from "react";
+import router from "@/router/routes";
 
 const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
