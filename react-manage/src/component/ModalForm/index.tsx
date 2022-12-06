@@ -15,7 +15,7 @@ const switchRender = (type: string, item: FormItem, form: any) => {
       return <Input type="textarea"></Input>;
     }
     case "upload": {
-      return <UploadImg />;
+      return <UploadImg item={item} form={form}/>;
     }
     case "ButtonWithPopover": {
       return item.popoverItem!(item, form);
@@ -33,7 +33,7 @@ const CollectionCreateForm: React.FC<IProps> = ({ visible, ModalInfo }) => {
   return (
     <Modal
       destroyOnClose={true}
-      visible={visible}
+      open={visible}
       title={ModalInfo.title}
       okText="确定"
       cancelText="取消"

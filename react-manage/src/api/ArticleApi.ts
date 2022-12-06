@@ -1,12 +1,12 @@
 import request from "@/config/index";
 import { DataType } from "@/api/types";
 import { ReturnType } from "./types";
-import { RowType } from "@/pages/Article/ArticleList/types";
+import { ArticleListType } from "@/pages/Article/ArticleList/types";
 export const getArticleListApi = (
-  pageSize: number,
   currentPage: number,
+  pageSize: number,
   searchText: string
-): Promise<ReturnType<DataType<RowType>>> =>
+): Promise<ReturnType<DataType<ArticleListType>>> =>
   request.get(
     `/article/getArticleList?pageSize=${pageSize}&currentPage=${currentPage}&searchText=${searchText}`
   );

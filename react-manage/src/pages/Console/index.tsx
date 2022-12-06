@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/useStore";
 import { getArticleList } from "@/store/articleStore";
 import { shallowEqual } from "react-redux";
 import style from "./index.module.less";
@@ -7,13 +7,13 @@ const index = () => {
   const dispatch = useAppDispatch()
   return (
     <>
-    <h1>{store.articleList}</h1>
-    <button onClick={e=>dispatch(getArticleList({id:1}))}></button>
+    <h1>{JSON.stringify(store.articleList)}</h1>
+    <button onClick={e=>dispatch(getArticleList([1,10,""]))}></button>
       <div className={style.card_container}>
-        <div className={style.card}></div>
-        <div className={style.card}></div>
-        <div className={style.card}></div>
-        <div className={style.card}></div>
+        {
+          [1,2,3,4].map(item=><div key={item} className={style.card}>{item}</div>)
+        }
+        
       </div>
     </>
   );

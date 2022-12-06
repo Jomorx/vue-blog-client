@@ -95,6 +95,7 @@ export class ArticleService {
     } else {
       await this.articleModel.update({ isTop: 1 }, { where: { articleId } });
     }
+    return success(null, '置顶成功');
   }
   async getArticleTimeLine() {
     const data = await this.articleModel.findAll({

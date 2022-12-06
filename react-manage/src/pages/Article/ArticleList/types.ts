@@ -1,4 +1,4 @@
-export interface RowType {
+export type ArticleListType = {
     articleId: React.Key;
     articleCover: string;
     articleTitle: string;
@@ -10,10 +10,10 @@ export interface RowType {
   }
 
 
-  export interface TableInfo {
+  export type TableInfo = {
     count: number;
     currentPage: number;
     pageSize: number;
-    data: RowType[];
+    data: ArticleListType[];
     searchText:string
   }

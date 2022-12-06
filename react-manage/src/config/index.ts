@@ -11,15 +11,29 @@ const openNotificationWithIcon = (
   type: NotificationType,
   description: string
 ) => {
-  notification[type]({
-    message: "Notification Title",
-    description: description,
-  });
+  switch(type){
+    case "success":{
+      if(description)
+      notification[type]({
+        message: "成功",
+        description: description,
+      });
+      break
+    }
+    case "error":{
+      notification[type]({
+        message: "失败",
+        description: description,
+      });
+      break
+  }
+}
 };
 
 request.interceptors.request.use((config) => {
   nprogress.start();
   // config.headers!["Content-Type"] = "application/json;charset=utf-8";
+  config.headers!.token = "";
   return config;
 });
 
@@ -27,6 +41,9 @@ request.interceptors.response.use(
   (res) => {
     nprogress.done();
     //相应成功做的事情
+    
+    openNotificationWithIcon("success",res.data.message);
+
     return res.data;
   },
 

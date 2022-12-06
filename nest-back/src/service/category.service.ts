@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Op } from 'sequelize';
+import { PageDto } from 'src/dto/pageDto';
 import { AppException } from 'src/filter/appException';
 import { Article } from 'src/model/articleModel';
 import { Category } from 'src/model/categoryModel';
@@ -12,7 +13,7 @@ export class CategoryService {
     @InjectModel(Category) private readonly categoryModel: typeof Category,
     @InjectModel(Article) private readonly articleModel: typeof Article,
   ) {}
-  async getCategoryList(pageDto) {
+  async getCategoryList(pageDto: PageDto) {
     let res: { rows?: Category[]; count?: number } = {};
     if (pageDto.searchText !== '') {
       res = await this.categoryModel.findAndCountAll({

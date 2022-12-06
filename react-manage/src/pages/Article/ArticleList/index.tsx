@@ -10,10 +10,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PageHeader from "../../../component/PageHeader";
 import { TableInfo } from "./types";
-import { RowType } from "./types";
+import { ArticleListType } from "./types";
 
 function index() {
-  const columns: ColumnsType<RowType> = [
+  const columns: ColumnsType<ArticleListType> = [
     {
       title: "文章封面",
       dataIndex: "articleCover",
@@ -55,10 +55,9 @@ function index() {
       render: (text, record) => {
         return (
           <Switch
-            checked={!!text}
+            defaultChecked={!!text}
             onClick={async () => {
               await switchIsTopApi(record.articleId as number, text);
-              flushTable();
             }}
           ></Switch>
         );
@@ -111,8 +110,8 @@ function index() {
   };
   const flushTable = async () => {
     const { data } = await getArticleListApi(
-      tableInfo.pageSize,
       tableInfo.currentPage,
+      tableInfo.pageSize,
       tableInfo.searchText
     );
     setTableInfo({ ...tableInfo, ...{ count: data.count, data: data.rows } });

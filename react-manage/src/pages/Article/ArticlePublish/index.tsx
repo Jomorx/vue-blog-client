@@ -79,12 +79,6 @@ function index() {
           },
         ],
         valuePropName:"src",
-        getValueFromEvent: (e: any) => {          
-          console.log("Upload event:", e.file.status);
-            console.log("src",e);
-            if(e.file.status==="done")
-            return e.file.response[0].src;
-        },
         initialValue: initValue?.articleCover,
       },
       {

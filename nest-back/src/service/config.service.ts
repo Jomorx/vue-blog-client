@@ -16,13 +16,6 @@ export class ConfigService {
         limit: pageDto.pageSize,
         offset: (pageDto.currentPage - 1) * pageDto.pageSize,
         where: { configName: { [Op.like]: `%${pageDto.searchText}%` } },
-        /**
-         *  where:{
-          *name:{
-           [Op.like]:'%'+req.query.name+'%'     
-    } 
-}
-         */
       });
     } else {
       res = await this.configModel.findAndCountAll({

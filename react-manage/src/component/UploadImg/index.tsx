@@ -1,10 +1,12 @@
 import { InboxOutlined } from "@ant-design/icons";
 import { FormInstance, message, Upload } from "antd";
 import React, { useEffect, useState } from "react";
+import { FormItem } from "../ModalForm/types";
 const { Dragger } = Upload;
 
-const App: React.FC<{ src?: string}> = (props) => {
+const App: React.FC<{ src?: string,form:FormInstance,item:FormItem}> = (props) => {
   const [src,setSrc] = useState<string|undefined>(props.src)  
+  
   const config = {
     name: "file",
     multiple: false,
@@ -14,7 +16,7 @@ const App: React.FC<{ src?: string}> = (props) => {
       if (status === "done") {
         message.success(`${info.file.name} file uploaded successfully.`);
         setSrc(info.file.response[0].src)
-
+        props.form.setFieldValue(props.item.name,info.file.response[0].src)
       } else if (status === "error") {
         message.error(`${info.file.name} file upload failed.`);
       }
@@ -26,7 +28,7 @@ const App: React.FC<{ src?: string}> = (props) => {
   };
 
   return (
-    <Dragger {...config}{...props} maxCount={1}>
+    <Dragger {...config} maxCount={1}>
       {src ? (
         <img src={props.src} style={{ width: "390px", height: "141px" }} />
       ) : (
