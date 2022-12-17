@@ -1,8 +1,8 @@
 import request from "@/config/axios";
 import { ReturnPageType, ReturnType } from "../types";
-import { Article } from "./types";
+import { Article,IArticleList } from "./types";
 
-export const getArticleTimeLineApi = <T>(): Promise<ReturnType<T>> =>
+export const getArticleTimeLineApi =(): Promise<ReturnType<IArticleList[]>> =>
   request.get("/article/getArticleTimeLine");
 export const getArticleListApi = (
   pageSize: number,

@@ -15,18 +15,13 @@
 </template>
 
 <script setup lang='ts'>
-import { getFriendChainListApi } from '../api/FrendChain'
+import { getFriendChainListApi,IFriendChain } from '../api/freindChain'
 import { onMounted, ref } from 'vue';
 
-interface IFriendChain {
-    friendChainName: string,
-    friendChainDescription: string;
-    friendChainAvatar: string;
-    friendChainLink: string
-}
+
 const friendChainList = ref<IFriendChain[]>([])
 const init = async () => {
-    const { data } = await getFriendChainListApi<IFriendChain>(1, 10, '')
+    const { data } = await getFriendChainListApi(1, 10, '')
     friendChainList.value = data.rows
 }
 onMounted(() => {

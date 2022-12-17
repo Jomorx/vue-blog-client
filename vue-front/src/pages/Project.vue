@@ -24,7 +24,7 @@
 <script setup lang='ts'>
 import { onMounted, ref } from 'vue'
 import { getProjectListApi } from '../api/ProjectApi';
-import { navigateTo } from '../utils/index'
+import { navigateTo } from '../utils'
 interface IProject {
     projectId: number,
     projectName: string
@@ -35,7 +35,7 @@ interface IProject {
 const projectList = ref<IProject[]>([])
 const init = async () => {
     const { data } = await getProjectListApi<IProject>(1, 10, '')
-    console.log(projectList.value = data.rows)
+    projectList.value = data.rows
 }
 
 onMounted(() => {

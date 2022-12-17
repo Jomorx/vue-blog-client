@@ -118,7 +118,7 @@ export class ArticleService {
         attributes: [
           'articleTitle',
           'articleId',
-          [fn('DATE_FORMAT', col('created_at'), '%Y/%m  '), 'createdAt'],
+          [fn('DATE_FORMAT', col('created_at'), '%Y-%m-%d  '), 'createdAt'],
         ],
       });
       item.articles = articles;

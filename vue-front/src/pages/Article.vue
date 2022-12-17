@@ -51,7 +51,7 @@ const route = useRoute();
 const article = ref<Article>();
 const { id } = route.params;
 const init = async () => {
-  const res = await getArticleByIdApi(id);
+  const res = await getArticleByIdApi(Number(id));
   article.value = res.data;
   article.value.articleContent = marked.parse(res.data.articleContent);
 };

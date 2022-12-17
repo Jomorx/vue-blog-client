@@ -12,3 +12,13 @@ export type Article = {
   viewCount: number;
   height: number;
 };
+
+export type IArticleList = {
+  days: string,
+  articles: {
+      articleId: number
+      articleTitle: string,
+      createdAt: Date
+  }[],
+  count: number
+}
