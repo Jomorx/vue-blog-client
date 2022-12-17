@@ -1,0 +1,6 @@
+{
+
+  "scripts": {
+    "start":"cd ./nest-back && npm run dev && cd ../vue-front && npm run dev"
+  }
+}

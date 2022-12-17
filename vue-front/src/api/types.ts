@@ -1,6 +1,6 @@
 export interface ReturnType<T>{
     code:number,
-    data:T[],
+    data:T,
     message:string
 }
 export interface ReturnPageType<T>{

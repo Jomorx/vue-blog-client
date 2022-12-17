@@ -65,7 +65,7 @@ export class ArticleService {
   }
 
   async getArticleById(id: number) {
-    return await this.articleModel.findOne({
+    const res = await this.articleModel.findOne({
       where: { articleId: id },
       include: [
         {
@@ -78,6 +78,7 @@ export class ArticleService {
         },
       ],
     });
+    return success(res);
   }
   async deleteArticleList(articleIdList: number[]) {
     for (const item of articleIdList) {

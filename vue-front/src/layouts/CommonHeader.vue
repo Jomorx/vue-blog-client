@@ -7,9 +7,6 @@
             <div class="right">
                 <div class="nav-item" v-for="(item, index) in nav"
                     :class="{ 'nav-item-active': item.path === route.path }" @click="navigateTo(item.path)">
-                    <!-- <Icon>
-                        <component :is="item.icon"></component>
-                    </Icon> -->
                     <span>
                         {{ item.label }}
                     </span>

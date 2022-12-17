@@ -15,7 +15,7 @@
 </template>
 <script setup lang='ts'>
 import { ref, onMounted } from 'vue';
-import { getArticleTimeLineApi } from '../api/ArticleApi';
+import { getArticleTimeLineApi } from '../api/article/ArticleApi';
 interface IArticleList {
     days: string,
     articles: {
