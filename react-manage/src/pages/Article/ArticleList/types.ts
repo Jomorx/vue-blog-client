@@ -1,19 +1,9 @@
-export type ArticleListType = {
-    articleId: React.Key;
-    articleCover: string;
-    articleTitle: string;
-    articleContent:string;
-    category: number;
-    viewCount: number;
-    isTop: number;
-    tagList:[]
-  }
+import { IArticle } from "@/api/article";
 
-
-  export type TableInfo = {
-    count: number;
-    currentPage: number;
-    pageSize: number;
-    data: ArticleListType[];
-    searchText:string
-  }
+export type TableInfo = {
+  count: number;
+  currentPage: number;
+  pageSize: number;
+  data: IArticle[];
+  searchText: string;
+};

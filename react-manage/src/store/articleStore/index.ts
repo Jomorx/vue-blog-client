@@ -1,4 +1,4 @@
-import { getArticleListApi } from "@/api/ArticleApi";
+import { getArticleListApi } from "@/api/article/ArticleApi";
 import { ArticleListType } from "@/pages/Article/ArticleList/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "..";
@@ -11,7 +11,7 @@ const initialState: articleState = {
 interface payloadType {
 }
 export const getArticleList = createAsyncThunk<void,[number,number,string],{state:RootState}>("",async (payload,{dispatch,getState})=>{
-  
+
   const res = await getArticleListApi(...payload)
   dispatch(changeArticleList(res.data.rows))
 })

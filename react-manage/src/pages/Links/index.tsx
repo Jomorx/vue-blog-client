@@ -4,7 +4,7 @@ import OperationButton from "@/component/OperationButton";
 import { Pagination, Table } from "antd";
 import { RowType, TableInfo } from "./types";
 import { ColumnsType } from "antd/lib/table";
-import { deleteTagListApi, editTagApi } from "@/api/TagApi";
+import { deleteTagListApi, editTagApi } from "@/api/tag/TagApi";
 import ButtonHeader from "@/component/ButtonHeader";
 import ModalForm from "@/component/ModalForm";
 import { ModalInfoType } from "@/component/ModalForm/types";

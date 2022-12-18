@@ -24,6 +24,11 @@ function index() {
       dataIndex: "projectName",
     },
     {
+      title:"项目链接",
+      dataIndex:"projectLink"
+    },
+
+    {
       title: "创建时间",
       dataIndex: "createdAt",
       render:(time)=>(

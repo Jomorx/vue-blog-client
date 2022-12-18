@@ -1,6 +1,9 @@
 {
 
   "scripts": {
-    "start":"cd ./nest-back && npm run dev && cd ../vue-front && npm run dev"
+    "nest":"cd ./nest-back && npm run dev",
+    "vue":"cd ./vue-front && npm run dev",
+    "react":"cd ./react-manage && npm run dev"
+
   }
 }

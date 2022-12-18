@@ -1,5 +1,5 @@
 import request from "@/config/index";
-import { ReturnType } from "./types";
+import { ReturnType } from "../types";
 import { DataType } from "@/api/types";
 import { RowType } from "@/pages/Article/TagManage/types";
 

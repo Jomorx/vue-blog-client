@@ -1,8 +1,7 @@
-import {ITag} from '@/api/tag'
-export interface TableInfo {
+export interface TableInfo<T> {
   count: number;
   currentPage: number;
   pageSize: number;
-  data: ITag[];
+  data: T[];
   searchText:string
 }

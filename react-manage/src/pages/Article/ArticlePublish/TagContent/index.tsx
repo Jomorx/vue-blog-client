@@ -1,4 +1,4 @@
-import { getTagListApi } from "@/api/TagApi";
+import { getTagListApi } from "@/api/tag/TagApi";
 import { FormItem } from "@/component/ModalForm/types";
 import { Button, Popover, Tag } from "antd";
 import React, { useEffect, useState } from "react";

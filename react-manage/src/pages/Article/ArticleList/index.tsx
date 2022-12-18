@@ -2,7 +2,8 @@ import {
   deleteArticleListApi,
   getArticleListApi,
   switchIsTopApi,
-} from "@/api/ArticleApi";
+  IArticle
+} from "@/api/article";
 import OperationButton from "@/component/OperationButton";
 import { Button, Table, Switch, Tag, Pagination } from "antd";
 import { ColumnsType } from "antd/lib/table";
@@ -10,10 +11,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PageHeader from "../../../component/PageHeader";
 import { TableInfo } from "./types";
-import { ArticleListType } from "./types";
 
 function index() {
-  const columns: ColumnsType<ArticleListType> = [
+  const columns: ColumnsType<IArticle> = [
     {
       title: "文章封面",
       dataIndex: "articleCover",

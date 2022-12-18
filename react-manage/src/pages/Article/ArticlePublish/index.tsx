@@ -12,7 +12,7 @@ import {
   getArticleByIdApi,
   updateArticleApi,
   uploadArticleApi,
-} from "@/api/ArticleApi";
+} from "@/api/article/ArticleApi";
 import { useParams } from "react-router-dom";
 function index() {
   const [title, setTitle] = useState("hello");
@@ -110,7 +110,7 @@ function index() {
   const init = async () => {
     if(JSON.stringify(param) !== '{}'){
       const res = await getArticleByIdApi(param.id);
-      setInitValue(res);
+      setInitValue(res.data);
     }
 
   };
