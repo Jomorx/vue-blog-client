@@ -1,76 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PageHeader from "@/component/PageHeader";
 import { Pagination, Table } from "antd";
 import ButtonHeader from "@/component/ButtonHeader";
 import ModalForm from "@/component/ModalForm";
-import { ModalInfoType } from "@/component/ModalForm/types";
-import {
-  deleteCategoryListApi,
-} from "@/api/CategoryApi";
-import { getLogListApi, insertLogApi } from "@/api/log";
-import useColumns from './table.config'
-import { useTable } from "@/hooks";
+import { deleteLogListApi, getLogListApi, insertLogApi } from "@/api/log";
+import useColumns from "./table.config";
+import { useModal, useTable } from "@/hooks";
 import { ILog } from "@/api/log";
+import { modalConfig } from "./modal.config";
 function index() {
-  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-  const { flushTable, tableInfo, setTableInfo } = useTable<ILog>(getLogListApi);
-  const onSelectChange = (newSelectedRowKeys:React.Key[]) => {
-    setSelectedRowKeys(newSelectedRowKeys);
-  };
-  const [modalInfo, setModalInfo] = useState<ModalInfoType>({
-    title: "编辑标签",
-    onCreate: () => {},
-    onCancel: () => {},
-    formItem: [],
-  });
-  const [visible, setVisible] = useState<boolean>(false);
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: onSelectChange,
-  };
-  const columns = useColumns(setModalInfo,setVisible,flushTable)
+  const {
+    flushTable,
+    tableInfo,
+    setTableInfo,
+    rowSelection,
+    batchDelete,
+    onSearch,
+  } = useTable<ILog>(getLogListApi, deleteLogListApi);
+  const { visible, modalInfo, addClick, setModalInfo, setVisible } = useModal(
+    "日志",
+    flushTable,
+    insertLogApi,
+    modalConfig
+  );
 
-  const batchDelete = async () => {
-    const res = await deleteCategoryListApi(selectedRowKeys as number[]);
-    flushTable();
-  };
-  const newAdd = () => {
-    setModalInfo({
-      title: "新增标签",
-      onCreate: async (value) => {
-        await insertLogApi(value);
-        flushTable();
-        setVisible(false);
-      },
-      onCancel: () => {
-        setVisible(false);
-      },
-      formItem: [
-        {
-          name: "logContent",
-          label: "日志内容",
-          type: "input",
-          rules: [
-            {
-              required: true,
-              message: "请输入分类名",
-            },
-          ],
-        },
-      ],
-    });
-    setVisible(true);
-  };
-  const onSearch = (value: string, event: any) => {
-    setTableInfo({ ...tableInfo, ...{ searchText: value, currentPage: 1 } });
-  };
+  const columns = useColumns(setModalInfo, setVisible, flushTable);
+
   return (
     <>
-      <PageHeader title="分类管理" />
+      <PageHeader title="日志管理" />
       <ButtonHeader
         batchDelete={batchDelete}
-        newAdd={newAdd}
-        placeHolder="请输入分类名"
+        newAdd={addClick}
+        placeHolder="请输入日志名"
         onSearch={onSearch}
       ></ButtonHeader>
       <Table
@@ -89,7 +51,6 @@ function index() {
           showQuickJumper
           showTotal={(total) => `Total ${total} items`}
           onChange={(page, pageSize) => {
-            console.log(page);
             setTableInfo((e) => {
               return { ...e, pageSize, currentPage: page };
             });

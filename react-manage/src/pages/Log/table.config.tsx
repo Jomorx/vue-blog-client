@@ -3,7 +3,8 @@ import OperationButton from "@/component/OperationButton";
 import { formatTime } from "@/utils";
 import { ColumnsType } from "antd/lib/table";
 
-const columns = (setModalInfo?:any,setVisible?:any,flushTable?:any): ColumnsType<ILog> => [
+const columns =(setModalInfo:any,setVisible:any,flushTable:any): ColumnsType<ILog>=>{
+  return [
   {
     title: "设置名",
     dataIndex: "logContent",
@@ -68,4 +69,5 @@ const columns = (setModalInfo?:any,setVisible?:any,flushTable?:any): ColumnsType
     width: "250px",
   },
 ]
+}
 export default columns;
