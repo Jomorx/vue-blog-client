@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PageHeader from "@/component/PageHeader";
 import OperationButton from "@/component/OperationButton";
 import { Pagination, Table } from "antd";
@@ -14,7 +14,7 @@ import ButtonHeader from "@/component/ButtonHeader";
 import ModalForm from "@/component/ModalForm";
 import { ModalInfoType } from "@/component/ModalForm/types";
 import { formatTime } from "@/utils";
-import { useTable } from "@/hooks/useTable/useTable";
+import { useTable } from "@/hooks";
 
 function index() {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
@@ -101,13 +101,9 @@ function index() {
       width: "250px",
     },
   ];
-
   columns.forEach((item) => {
     item.align = "center";
   });
-
-
-
   const batchDelete = async () => {
     await deleteTagListApi(selectedRowKeys as number[]);
     flushTable();

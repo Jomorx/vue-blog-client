@@ -1,6 +1,6 @@
 
 import { lazy } from "react";
-const  Layout = lazy(()=>import("@/layouts/ManageLayout")) 
+const  Layout = lazy(()=>import("@/layouts/ManageLayout"))
 const Console=lazy(()=>import("@/pages/Console")) ;
 
 const CategoryManage=lazy(()=>import("@/pages/Article/CategoryManage"))
@@ -18,6 +18,7 @@ const Config = lazy(()=>import("@/pages/Config")) ;
 
 import { FileTextOutlined, GlobalOutlined } from "@ant-design/icons";
 import { RouteItem } from "./types";
+import Log from "@/pages/Log";
 
 
 const router: RouteItem[] = [
@@ -72,8 +73,6 @@ const router: RouteItem[] = [
           },
         ],
       },
-
-
       {
         path: "/project",
         icon: <FileTextOutlined />,
@@ -106,6 +105,13 @@ const router: RouteItem[] = [
         key: "/links",
         icon: <GlobalOutlined />,
         label: "友链",
+      },
+      {
+        element: <Log/>,
+        path: "/log",
+        key: "/log",
+        icon: <GlobalOutlined />,
+        label: "网站日志",
       },
       {
         element: <Config/>,

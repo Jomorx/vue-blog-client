@@ -11,8 +11,8 @@ export const useTable = <T>(getDataApi:Function) => {
   });
     const flushTable = async () => {
       const { data } = await getDataApi(
-        tableInfo.pageSize,
         tableInfo.currentPage,
+        tableInfo.pageSize,
         tableInfo.searchText
       );
       setTableInfo({ ...tableInfo, ...{ count: data.count, data: data.rows } });

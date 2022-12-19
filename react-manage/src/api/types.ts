@@ -6,4 +6,4 @@ export interface ReturnType<T>{
 export interface DataType<T> {
     count: number;
     rows: T[];
-  }
+}

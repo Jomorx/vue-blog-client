@@ -2,29 +2,23 @@ import React, { useEffect, useState } from "react";
 import PageHeader from "@/component/PageHeader";
 import OperationButton from "@/component/OperationButton";
 import { Pagination, Table } from "antd";
-import { RowType, TableInfo } from "./types";
+import { TableInfo } from "./types";
 import { ColumnsType } from "antd/lib/table";
-import { deleteTagListApi, editTagApi } from "@/api/tag/TagApi";
 import ButtonHeader from "@/component/ButtonHeader";
 import ModalForm from "@/component/ModalForm";
 import { ModalInfoType } from "@/component/ModalForm/types";
 import { formatTime } from "@/utils";
 import {
-  deleteCategoryListApi,
-  editCategoryApi,
-  getCategoryListApi,
-  insertCategoryApi,
-} from "@/api/CategoryApi";
-import { deleteFriendChainListApi, editFriendChainApi, getFriendChainListApi, insertFriendChainApi } from "@/api/FriendChainApi";
+  IFriendChain,
+  deleteFriendChainListApi,
+  editFriendChainApi,
+  getFriendChainListApi,
+  insertFriendChainApi,
+} from "@/api/friendChain";
+import { useTable } from "@/hooks";
 function index() {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-  const [tableInfo, setTableInfo] = useState<TableInfo>({
-    currentPage: 1,
-    pageSize: 10,
-    data: [],
-    count: 0,
-    searchText: "",
-  });
+  const {tableInfo,setTableInfo,flushTable} = useTable<IFriendChain>(getFriendChainListApi);
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     setSelectedRowKeys(newSelectedRowKeys);
   };
@@ -39,7 +33,7 @@ function index() {
     selectedRowKeys,
     onChange: onSelectChange,
   };
-  const columns: ColumnsType<RowType> = [
+  const columns: ColumnsType<IFriendChain> = [
     {
       title: "友链名",
       dataIndex: "friendChainName",
@@ -95,7 +89,10 @@ function index() {
                 setModalInfo({
                   title: "编辑友链",
                   onCreate: async (value) => {
-                    await editFriendChainApi({...value,friendChainId:record.friendChainId});
+                    await editFriendChainApi({
+                      ...value,
+                      friendChainId: record.friendChainId,
+                    });
                     flushTable();
                     setVisible(false);
                   },
@@ -107,7 +104,7 @@ function index() {
                       name: "friendChainName",
                       label: "友链名称",
                       type: "input",
-                      initialValue:record.friendChainName,
+                      initialValue: record.friendChainName,
                       rules: [
                         {
                           required: true,
@@ -119,7 +116,7 @@ function index() {
                       name: "friendChainDescription",
                       label: "友链描述",
                       type: "input",
-                      initialValue:record.friendChainDescription,
+                      initialValue: record.friendChainDescription,
                       rules: [
                         {
                           required: true,
@@ -131,7 +128,7 @@ function index() {
                       name: "friendChainLink",
                       label: "友链链接",
                       type: "input",
-                      initialValue:record.friendChainLink,
+                      initialValue: record.friendChainLink,
                       rules: [
                         {
                           required: true,
@@ -143,7 +140,7 @@ function index() {
                       name: "friendChainAvatar",
                       label: "友链图片",
                       type: "upload",
-                      initialValue:record.friendChainAvatar,
+                      initialValue: record.friendChainAvatar,
                       rules: [
                         {
                           required: true,
@@ -153,7 +150,7 @@ function index() {
                       valuePropName: "src",
                       getValueFromEvent: (e: any) => {
                         console.log("Upload event:", e.file.status);
-                        if (e.file.status==='done') {
+                        if (e.file.status === "done") {
                           return e?.file.response[0].src;
                         }
                       },
@@ -163,7 +160,9 @@ function index() {
                 setVisible(true);
               }}
               clickDelete={async () => {
-                await deleteFriendChainListApi([record.friendChainId as number]);
+                await deleteFriendChainListApi([
+                  record.friendChainId as number,
+                ]);
                 flushTable();
               }}
             />
@@ -178,12 +177,9 @@ function index() {
     item.align = "center";
   });
 
-  useEffect(() => {
-    flushTable();
-  }, [tableInfo.pageSize, tableInfo.currentPage, tableInfo.searchText]);
-
   const batchDelete = async () => {
     const res = await deleteFriendChainListApi(selectedRowKeys as number[]);
+    flushTable()
   };
   const newAdd = () => {
     setModalInfo({
@@ -251,15 +247,6 @@ function index() {
       ],
     });
     setVisible(true);
-  };
-  //Todo
-  const flushTable = async () => {
-    const { data } = await getFriendChainListApi(
-      tableInfo.pageSize,
-      tableInfo.currentPage,
-      tableInfo.searchText
-    );
-    setTableInfo({ ...tableInfo, ...{ count: data.count, data: data.rows } });
   };
   const onSearch = (value: string, event: any) => {
     setTableInfo({ ...tableInfo, ...{ searchText: value, currentPage: 1 } });
