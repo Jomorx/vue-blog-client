@@ -1,14 +1,9 @@
-export interface RowType {
-  configId:  number;
-  configName: number;
-  configContent: string;
-  createdAt: string;
-}
+import { IConfig } from "@/api/config";
 
 export interface TableInfo {
   count: number;
   currentPage: number;
   pageSize: number;
-  data: RowType[];
+  data: IConfig[];
   searchText: string;
 }

@@ -9,20 +9,10 @@ export class ConfigService {
   constructor(
     @InjectModel(Config) private readonly configModel: typeof Config,
   ) {}
-  async getConfigList(pageDto) {
-    let res: { rows?: Config[]; count?: number } = {};
-    if (pageDto.searchText !== '') {
-      res = await this.configModel.findAndCountAll({
-        limit: pageDto.pageSize,
-        offset: (pageDto.currentPage - 1) * pageDto.pageSize,
-        where: { configName: { [Op.like]: `%${pageDto.searchText}%` } },
-      });
-    } else {
-      res = await this.configModel.findAndCountAll({
-        limit: pageDto.pageSize,
-        offset: (pageDto.currentPage - 1) * pageDto.pageSize,
-      });
-    }
+  async getConfigById(id: number) {
+    const res = await this.configModel.findOne({
+      where: { configId: id },
+    });
     return success(res);
   }
 

@@ -3,7 +3,6 @@ import { Button, Input } from "antd";
 import MdEditor from "md-editor-rt";
 import PageHeader from "@/component/PageHeader";
 import style from "./index.module.less";
-import "md-editor-rt/lib/style.css";
 import ModalForm from "@/component/ModalForm";
 import { ModalInfoType } from "@/component/ModalForm/types";
 import categoryContent from "./CategoryContent/categoryContent";

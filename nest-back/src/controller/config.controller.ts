@@ -1,13 +1,12 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import { PageDto } from 'src/dto/pageDto';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ConfigService } from 'src/service/config.service';
 
 @Controller('config')
 export class ConfigController {
   constructor(private readonly configService: ConfigService) {}
-  @Get('getConfigList')
-  async getConfigList(@Query() pageDto: PageDto) {
-    return await this.configService.getConfigList(pageDto);
+  @Get('getConfigById/:id')
+  async getConfigById(@Param('id') id: number) {
+    return await this.configService.getConfigById(id);
   }
   //   @Post('deleteConfigList')
   //   async deleteTagList(@Body('categoryList') tagList) {

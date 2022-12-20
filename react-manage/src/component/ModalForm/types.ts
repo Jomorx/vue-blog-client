@@ -1,4 +1,3 @@
-import { TooltipPlacement } from "antd/lib/tooltip";
 import React, { ReactNode } from "react";
 
 export interface FormItem {

@@ -115,8 +115,8 @@ const router: RouteItem[] = [
       },
       {
         element: <Config/>,
-        path: "/config",
-        key: "/config",
+        path: "/config/:id",
+        key: "/config/1",
         icon: <GlobalOutlined />,
         label: "网站设置",
       },
