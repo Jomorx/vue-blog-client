@@ -17,7 +17,7 @@ export class ConfigController {
     return await this.configService.insertConfig(Category);
   }
   @Post('editConfig')
-  async editConfig(@Body() Category) {
-    return await this.configService.editConfig(Category);
+  async editConfig(@Body() Config) {
+    return await this.configService.editConfig(Config);
   }
 }

@@ -1,23 +1,24 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Input } from "antd";
 import MdEditor from "md-editor-rt";
 import PageHeader from "@/component/PageHeader";
 import style from "./index.module.less";
 import { useParams } from "react-router-dom";
-import { getConfigByIdApi, IConfig } from "@/api/config";
+import { getConfigByIdApi, editConfigApi, IConfig } from "@/api/config";
 function index() {
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
+  const [initData, setInitData] = useState<IConfig>({
+    configId: 0,
+    configName: "",
+    configContent: "",
+  });
   const param = useParams();
-  const publishAbout = () => {
+  const publishConfig = () => {
+    editConfigApi(initData);
   };
-
-
   const init = async () => {
-    if(JSON.stringify(param) !== '{}'){
-      const res = await getConfigByIdApi(Number(param.id));
-      setTitle(res.data.configName)
-      setText(res.data.configContent)
+    if (JSON.stringify(param) !== "{}") {
+      const { data } = await getConfigByIdApi(Number(param.id));
+      setInitData(data)
     }
   };
   useEffect(() => {
@@ -34,9 +35,9 @@ function index() {
         <Input
           showCount
           maxLength={20}
-          value={title}
+          value={initData.configName}
           onChange={(e) => {
-            setTitle(e.target.value);
+            setInitData({...initData,configName:e.target.value})
           }}
         />
         <Button size="large" danger className={style.button}>
@@ -48,13 +49,13 @@ function index() {
           danger
           className={style.button}
           onClick={() => {
-            // publishArticle();
+            publishConfig();
           }}
         >
           发布文章
         </Button>
       </div>
-      <MdEditor modelValue={text} onChange={setText} />
+      <MdEditor modelValue={initData.configContent} onChange={configContent=>setInitData({...initData,configContent})} />
     </>
   );
 }
