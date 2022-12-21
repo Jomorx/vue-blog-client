@@ -3,7 +3,7 @@ import OperationButton from "@/component/OperationButton";
 import { formatTime } from "@/utils";
 import { ColumnsType } from "antd/lib/table";
 
-const columns =(setModalInfo:any,setVisible:any,flushTable:any): ColumnsType<ILog>=>{
+const columns =(setModalInfo:any,setVisible:any,flushTable:any,editClick:any): ColumnsType<ILog>=>{
   return [
   {
     title: "设置名",
@@ -27,36 +27,7 @@ const columns =(setModalInfo:any,setVisible:any,flushTable:any): ColumnsType<ILo
         <>
           <OperationButton
             clickEdit={() => {
-              setModalInfo({
-                title: "编辑日志",
-                onCreate: async (value:ILog) =>
-                {
-                  await editLogApi({
-                    ...value,
-                    logId: record.logId,
-                  });
-                  flushTable();
-                  setVisible(false);
-                },
-                onCancel: () => {
-                  setVisible(false);
-                },
-                formItem: [
-                  {
-                    name: "logContent",
-                    label: "日志内容",
-                    type: "input",
-                    initialValue: record.logContent,
-                    rules: [
-                      {
-                        required: true,
-                        message: "请输入日志内容",
-                      },
-                    ],
-                  },
-                ],
-              });
-              setVisible(true);
+              editClick(record)
             }}
             clickDelete={async () => {
               await deleteLogListApi([record.logId as number]);

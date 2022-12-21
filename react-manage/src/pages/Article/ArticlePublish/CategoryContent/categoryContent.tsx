@@ -1,4 +1,4 @@
-import { getCategoryListApi } from "@/api/CategoryApi";
+import { getCategoryListApi } from "@/api/category/CategoryApi";
 import { FormItem } from "@/component/ModalForm/types";
 import { Button, Popover, Tag } from "antd";
 import React, { useEffect, useState } from "react";

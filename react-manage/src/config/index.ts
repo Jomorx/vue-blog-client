@@ -4,7 +4,7 @@ import nprogress from "nprogress";
 import "nprogress/nprogress.css";
 const request: AxiosInstance = axios.create({
   baseURL: "http://localhost:3000",
-  timeout: 6000,
+  timeout: 3000,
 });
 type NotificationType = "success" | "info" | "warning" | "error";
 const openNotificationWithIcon = (
@@ -41,7 +41,7 @@ request.interceptors.response.use(
   (res) => {
     nprogress.done();
     //相应成功做的事情
-    
+
     openNotificationWithIcon("success",res.data.message);
 
     return res.data;

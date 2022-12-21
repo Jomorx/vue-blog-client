@@ -1,15 +1,22 @@
 import request from "@/config/index";
 import { ReturnType } from "../types";
 import { DataType } from "@/api/types";
-import { RowType } from "@/pages/Article/TagManage/types";
+import { ITag } from "@/api/tag";
 
 export const getTagListApi = (
-  pageSize: number,
   currentPage: number,
+  pageSize: number,
   searchText: string
-): Promise<ReturnType<DataType<RowType>>> =>
+): Promise<ReturnType<DataType<ITag>>> =>
   request.get(
-    `/tag/getTagList?pageSize=${pageSize}&currentPage=${currentPage}&searchText=${searchText}`
+    `/tag/getTagList`,{
+      params:{
+        currentPage,
+        pageSize,
+        searchText
+      }
+
+    }
   );
 
 export const insertTagApi = (tagName: string) =>

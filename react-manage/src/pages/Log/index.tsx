@@ -3,7 +3,7 @@ import PageHeader from "@/component/PageHeader";
 import { Pagination, Table } from "antd";
 import ButtonHeader from "@/component/ButtonHeader";
 import ModalForm from "@/component/ModalForm";
-import { deleteLogListApi, getLogListApi, insertLogApi } from "@/api/log";
+import { deleteLogListApi, editLogApi, getLogListApi, insertLogApi } from "@/api/log";
 import useColumns from "./table.config";
 import { useModal, useTable } from "@/hooks";
 import { ILog } from "@/api/log";
@@ -17,14 +17,15 @@ function index() {
     batchDelete,
     onSearch,
   } = useTable<ILog>(getLogListApi, deleteLogListApi);
-  const { visible, modalInfo, addClick, setModalInfo, setVisible } = useModal(
+  const { visible, modalInfo, addClick, setModalInfo, setVisible,editClick } = useModal(
     "日志",
     flushTable,
     insertLogApi,
-    modalConfig
+    editLogApi,
+    modalConfig,
   );
 
-  const columns = useColumns(setModalInfo, setVisible, flushTable);
+  const columns = useColumns(setModalInfo, setVisible, flushTable,editClick);
 
   return (
     <>

@@ -1,16 +1,10 @@
-export interface RowType {
-  categoryCover: string | undefined;
-  categoryId: number;
-  categoryName: string;
-  categoryDescription:string
-  articleCount: number;
-  createdAt: string;
-}
+import { ICategory } from "@/api/category";
+
 
 export interface TableInfo {
   count: number;
   currentPage: number;
   pageSize: number;
-  data: RowType[];
+  data: ICategory[];
   searchText: string;
 }

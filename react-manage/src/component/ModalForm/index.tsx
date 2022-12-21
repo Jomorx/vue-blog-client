@@ -42,7 +42,6 @@ const CollectionCreateForm: React.FC<IProps> = ({ visible, ModalInfo }) => {
         form
           .validateFields()
           .then(async (values) => {
-            console.log(values);
             await ModalInfo.onCreate(values);
             form.resetFields();
           })
@@ -56,7 +55,7 @@ const CollectionCreateForm: React.FC<IProps> = ({ visible, ModalInfo }) => {
         form={form}
         layout="horizontal"
         name="form_in_modal"
-        
+
       >
         {ModalInfo.formItem.map((item: FormItem) => {
           return (
@@ -73,7 +72,7 @@ const CollectionCreateForm: React.FC<IProps> = ({ visible, ModalInfo }) => {
             </Form.Item>
           );
         })}
-       
+
       </Form>
     </Modal>
   );
