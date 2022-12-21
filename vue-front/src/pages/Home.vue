@@ -47,7 +47,6 @@ import { onMounted, onUnmounted, ref, nextTick } from "vue";
 import { getArticleListApi } from "../api/article/ArticleApi";
 import { getRandomInt } from "../utils";
 import { EyeOutlined, FieldTimeOutlined } from "@vicons/antd";
-import { formatTime } from "../utils/index";
 import { useRouter } from "vue-router";
 import {Article} from '@/api/article'
 const router = useRouter();
