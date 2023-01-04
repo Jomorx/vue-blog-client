@@ -60,7 +60,7 @@ export default (
     { deep: true }
   );
   //滚动防抖
-  let timer: NodeJS.Timer | null = null;
+  let timer: any = null;
   const scrollFn = () => {
     if (timer) {
       clearTimeout(timer);
