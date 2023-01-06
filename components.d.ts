@@ -12,8 +12,8 @@ declare module '@vue/runtime-core' {
     NInput: typeof import('naive-ui')['NInput']
     NNumberAnimation: typeof import('naive-ui')['NNumberAnimation']
     NSpace: typeof import('naive-ui')['NSpace']
-    NTimeline: typeof import('naive-ui')['NTimeline']
-    NTimelineItem: typeof import('naive-ui')['NTimelineItem']
+    NTimeline: typeof import("naive-ui")["NTimeline"]
+    NTimelineItem: typeof import("naive-ui")["NTimelineItem"]
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
