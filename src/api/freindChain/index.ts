@@ -1,2 +1,2 @@
-export * from './FrendChain'
-export * from './types'
+export * from "./FrendChain";
+export * from "./types";
