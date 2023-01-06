@@ -62,8 +62,6 @@ onMounted(() => {
 	align-items: center;
 	flex-direction: column;
 	padding: 30px 0;
-	.title {
-	}
 	.describe {
 		margin-top: 20px;
 		display: flex;
