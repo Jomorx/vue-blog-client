@@ -2,14 +2,15 @@
 	<header :class="{ 'hidden-header': isHidden, w: true }">
 		<div class="container w">
 			<div class="left">
-				<span @click="">HCH</span>
+				<span @click="navigateTo('/')">Jomorx</span>
 			</div>
 			<div class="right">
 				<div
 					class="nav-item"
-					v-for="(item, index) in nav"
+					v-for="item in nav"
 					:class="{ 'nav-item-active': item.path === route.path }"
 					@click="navigateTo(item.path)"
+					:key="item.path"
 				>
 					<span>
 						{{ item.label }}
@@ -19,7 +20,7 @@
 					<n-input placeholder="" v-model:value="searchText">
 						<template #suffix>
 							<Icon class="search-icon">
-								<SearchOutlined @click="showValue"></SearchOutlined>
+								<SearchOutlined />
 							</Icon>
 						</template>
 					</n-input>
@@ -91,20 +92,14 @@ onMounted(() => {
 	});
 });
 
-const showValue = () => {
-	console.log(searchText.value);
-};
 const navigateTo = (path: string) => {
 	router.push({ path });
 };
 </script>
 
 <style scoped lang="scss">
-* {
-	background-color: white;
-}
-
 header {
+	background: var(--frBgColor);
 	font-weight: 600;
 	font-size: 16px;
 	position: fixed;

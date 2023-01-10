@@ -1,0 +1,17 @@
+
+:root {
+    --frBgColor: white;
+    --seBgColor: #f5f6fa;
+    --color: black;
+
+}
+:root:has(.dark) {
+    --frBgColor: black;
+    --seBgColor: #161817;
+    --color: white;
+
+}
+body {
+    transition: all 0.3s linear;
+}
+

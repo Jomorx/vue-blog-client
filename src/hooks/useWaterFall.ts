@@ -32,7 +32,7 @@ export default (
 			dom.value![i].style.left = `${i * 281}px`;
 			arr.push(dom.value![i].offsetHeight);
 		}
-		generate(3, dataList.value?.length!);
+		generate(3, dataList.value.length!);
 	};
 	watch(
 		() => searchInfo,
@@ -46,13 +46,13 @@ export default (
 					item.height = getRandomInt(100, 200);
 				});
 				dataList.value?.push(...data.data.rows);
-				if (dataList.value?.length! >= data.data.count) {
+				if (dataList.value.length! >= data.data.count) {
 					loadAll = true;
 				}
 				nextTick(() => {
 					generate(
 						(searchInfo.value.currentPage - 1) * searchInfo.value.pageSize,
-						dataList.value?.length!
+						dataList.value.length!
 					);
 				});
 			});

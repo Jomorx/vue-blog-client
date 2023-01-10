@@ -27,7 +27,6 @@ const articleList = ref<IArticleList[]>();
 const init = async () => {
 	const res = await getArticleTimeLineApi();
 	articleList.value = res.data;
-	console.log(articleList.value);
 };
 const router = useRouter();
 onMounted(() => {

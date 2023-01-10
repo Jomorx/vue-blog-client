@@ -12,7 +12,7 @@
 				/>
 				<div class="author-info">
 					<div class="myname">
-						<span>HCH</span>
+						<span>Jomorx</span>
 					</div>
 					<div class="instruction">
 						<span>软件工程</span><br />
@@ -93,7 +93,7 @@ import { GithubOutlined, QqCircleFilled, EnvironmentOutlined, WechatOutlined } f
 
 	.left {
 		width: 844px;
-		background-color: white;
+		/* background-color: white; */
 	}
 
 	.right {
@@ -101,8 +101,7 @@ import { GithubOutlined, QqCircleFilled, EnvironmentOutlined, WechatOutlined } f
 
 		.info-card {
 			border-radius: 5px;
-
-			background-color: white;
+			background: var(--frBgColor);
 			/* position: sticky; */
 			/* top: 20px; */
 			width: 100%;
@@ -198,7 +197,8 @@ import { GithubOutlined, QqCircleFilled, EnvironmentOutlined, WechatOutlined } f
 		.article-info-container {
 			border-radius: 5px;
 			padding: 20px 0;
-			background-color: white;
+			background: var(--frBgColor);
+
 			text-align: center;
 			display: flex;
 			justify-content: space-between;

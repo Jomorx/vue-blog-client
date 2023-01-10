@@ -15,5 +15,7 @@ defineProps<{
 	min-width: 200px;
 	max-width: 980px;
 	margin: 0 auto;
+	color: var(--color);
+	background: var(--frBgColor);
 }
 </style>

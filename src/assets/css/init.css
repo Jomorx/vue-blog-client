@@ -1,12 +1,11 @@
 /*编码*/
-
 /*
 Document : CSS样式初始化
 Description: CSS样式表的初始化，全局样式设置。
 */
 /* 全局CSS reset */
-/* 页面设置 */
 
+/* 页面设置 */
 /* 初始化标签在所有浏览器中的margin、padding值 */
 body,
 div,
@@ -47,7 +46,6 @@ html {
 
 /* 酌情修改 */
 body {
-	background: #fff;
 	font-family: "微软雅黑", "宋体";
 }
 
@@ -239,3 +237,4 @@ a {
 	display: inline;
 }
 /*浮动后，此元素会被显示为内联元素，元素前后没有换行符*/
+

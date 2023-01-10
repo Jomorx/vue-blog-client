@@ -8,7 +8,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { getConfigByIdApi, IConfig } from "@/api/config";
-import { marked } from "marked";
 import moMarkdown from "@/components/moMarkdown.vue";
 const about = ref<IConfig>();
 const init = async () => {

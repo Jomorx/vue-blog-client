@@ -1,28 +1,45 @@
 <template>
 	<!-- <n-scrollbar style="max-height: 100vh"> -->
-	<CommonHeader />
-	<CommonContent />
+	<div :class="{ dark: darkTheme }">
+		<CommonHeader />
+		<CommonContent />
+		<button
+			@click="
+				() => {
+					darkTheme = !darkTheme;
+				}
+			"
+			class="themeBtn"
+		>
+			theme
+		</button>
+	</div>
 	<!-- </n-scrollbar> -->
 </template>
 
 <script setup lang="ts">
 import CommonHeader from "./layouts/CommonHeader.vue";
 import CommonContent from "./layouts/CommonContent.vue";
+import { ref } from "vue";
+const darkTheme = ref(false);
 </script>
 
 <style lang="scss">
-@import "./assets/init.css";
-
 body {
-	background-color: #f5f6fa;
-	/* font-family: 楷体;  */
+	background: var(--seBgColor);
+	color: var(--color);
 }
-
+.themeBtn {
+	position: fixed;
+	bottom: 20px;
+	right: 40px;
+}
+// 版心
 .w {
 	width: 1200px;
 	margin: 0 auto;
 }
-
+//线
 .line {
 	height: 4px;
 	border: 0px;
@@ -38,6 +55,7 @@ body {
 }
 .main {
 	padding: 35px;
+	background-color: var(--frBgColor);
 }
 ::-webkit-scrollbar {
 	width: 5px;

@@ -45,6 +45,8 @@ import { getRandomInt } from "../utils";
 import { EyeOutlined, FieldTimeOutlined } from "@vicons/antd";
 import { useRouter } from "vue-router";
 import { Article } from "@/api/article";
+import appStore from "@/store";
+import { storeToRefs } from "pinia";
 const router = useRouter();
 const articleList = ref<Article[]>();
 const handlerClickArticle = (id: number) => {
@@ -63,24 +65,23 @@ const { scrollFn, generateStart } = useWaterFall(
 	articleInfo,
 	getArticleListApi
 );
-
+const { pageSize, currentPage, searchText } = articleInfo.value;
+const { articleStore } = appStore;
 const init = async () => {
-	const { data: res } = await getArticleListApi(
-		articleInfo.value.pageSize,
-		articleInfo.value.currentPage,
-		articleInfo.value.searchText
-	);
-	res.rows.forEach((item) => {
+	const { data } = await getArticleListApi(pageSize, currentPage, searchText);
+	data.rows.forEach((item) => {
 		item.height = getRandomInt(100, 200);
 	});
-	articleList.value = res.rows;
+	articleList.value = data.rows;
 	nextTick(() => {
 		generateStart();
 	});
 };
+
 onMounted(() => {
-	window.addEventListener("scroll", scrollFn);
 	init();
+
+	window.addEventListener("scroll", scrollFn);
 });
 onUnmounted(() => {
 	window.removeEventListener("scroll", scrollFn);
@@ -90,15 +91,13 @@ onUnmounted(() => {
 <style scoped lang="scss">
 .home-container {
 	position: relative;
-	background-color: #f5f6fa;
 	height: 100%;
 
 	.article-container {
-		background-color: white;
 		position: absolute;
 		width: 30%;
 		cursor: pointer;
-
+		background: var(--frBgColor);
 		.image-container {
 			overflow: hidden;
 
@@ -114,7 +113,6 @@ onUnmounted(() => {
 
 		.card-detail {
 			padding: 0 5px 5px 5px;
-
 			.article-title {
 				margin: 10px 0;
 

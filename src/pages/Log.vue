@@ -51,7 +51,9 @@ onMounted(init);
 		z-index: 2;
 		width: 40%;
 		padding: 20px;
-		background-color: #e5e7eb;
+		/* background-color: #e5e7eb; */
+		background-color: var(--seBgColor);
+
 		min-height: 50px;
 		padding: 20px;
 		position: relative;
@@ -62,7 +64,6 @@ onMounted(init);
 			content: "";
 			border-top: 8px solid transparent;
 			border-bottom: 8px solid transparent;
-
 			top: calc(50% - 8px);
 			position: absolute;
 		}
@@ -88,7 +89,7 @@ onMounted(init);
 
 			&::before {
 				border-right: 8px solid transparent;
-				border-left: 8px solid #e5e7eb;
+				border-left: 8px solid var(--seBgColor);
 				right: -16px;
 			}
 		}
@@ -102,7 +103,7 @@ onMounted(init);
 			}
 
 			&::before {
-				border-right: 8px solid #e5e7eb;
+				border-right: 8px solid var(--seBgColor);
 				border-left: 8px solid transparent;
 				left: -16px;
 			}
