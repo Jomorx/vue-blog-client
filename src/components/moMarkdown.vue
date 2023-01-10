@@ -18,4 +18,17 @@ defineProps<{
 	color: var(--color);
 	background: var(--frBgColor);
 }
+:deep(pre) {
+	background-color: var(--thBgColor) !important;
+}
+:deep(th) {
+	color: var(--color);
+	background-color: var(--seBgColor);
+	border-color: var(--thBgColor);
+}
+:deep(td) {
+	color: var(--color);
+	background-color: var(--seBgColor);
+	border-color: var(--mdBorderColor) !important;
+}
 </style>

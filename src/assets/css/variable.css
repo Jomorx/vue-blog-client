@@ -1,17 +1,18 @@
-
 :root {
-    --frBgColor: white;
-    --seBgColor: #f5f6fa;
-    --color: black;
-
+	--frBgColor: white;
+	--seBgColor: #f5f6fa;
+    --thBgColor: #f6f8fa;
+    --mdBorderColor:#d0d7de;
+	--color: black;
 }
 :root:has(.dark) {
-    --frBgColor: black;
-    --seBgColor: #161817;
-    --color: white;
+	--frBgColor: black;
+	--seBgColor: #161817;
+    --thBgColor:#57606a;
+	--color: white;
+    --mdBorderColor:#d0d7de;
 
 }
 body {
-    transition: all 0.3s linear;
+	transition: all 0.3s linear;
 }
-
