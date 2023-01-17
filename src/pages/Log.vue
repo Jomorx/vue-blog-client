@@ -15,6 +15,7 @@
 				:key="item.logId"
 			>
 				<span>{{ item.logContent }}</span>
+				<span v-time>{{ item.createdAt }}</span>
 			</div>
 			<p class="clear-both"></p>
 		</div>

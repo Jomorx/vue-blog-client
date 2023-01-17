@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    MoInfoCard: typeof import('./src/components/MoInfoCard.vue')['default']
     MoMarkdown: typeof import('./src/components/moMarkdown.vue')['default']
     NButton: typeof import('naive-ui')['NButton']
     NInput: typeof import('naive-ui')['NInput']

@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from "axios";
 import nprogress from "nprogress";
 import "nprogress/nprogress.css";
 const request: AxiosInstance = axios.create({
-	baseURL: "http://localhost:3000",
+	baseURL: "http://47.113.204.79:3000",
 	timeout: 6000,
 });
 
@@ -20,6 +20,7 @@ request.interceptors.response.use(
 	},
 
 	(err) => {
+		nprogress.done();
 		return Promise.reject(err);
 	}
 );
