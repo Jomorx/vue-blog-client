@@ -1,4 +1,4 @@
-export interface ReturnType<T> {
+export interface IReturnType<T> {
 	code: number;
 	data: T;
 	message: string;
@@ -11,3 +11,8 @@ export interface ReturnPageType<T> {
 	};
 	message: string;
 }
+export type IPageDto = {
+	currentPage: number;
+	pageSize: number;
+	searchText: string;
+};

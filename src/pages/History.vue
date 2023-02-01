@@ -1,6 +1,6 @@
 <template>
 	<div class="main">
-		<div v-for="item in articleList" :key="item.days">
+		<div v-for="item in articleTimeLine" :key="item.days">
 			<n-timeline>
 				<n-timeline-item
 					class="info"
@@ -20,17 +20,16 @@
 </template>
 <script setup lang="ts">
 import { useRouter } from "vue-router";
-import { ref, onMounted } from "vue";
-import { getArticleTimeLineApi } from "../api/article/ArticleApi";
-import { IArticleList } from "@/api/article";
-const articleList = ref<IArticleList[]>();
-const init = async () => {
-	const res = await getArticleTimeLineApi();
-	articleList.value = res.data;
-};
+import { onMounted } from "vue";
+import appStore from "@/store";
+import { storeToRefs } from "pinia";
+const { articleStore } = appStore;
+const { articleTimeLine } = storeToRefs(articleStore);
+const { fetchArticleTimeLineAction } = articleStore;
+
 const router = useRouter();
 onMounted(() => {
-	init();
+	fetchArticleTimeLineAction();
 });
 </script>
 

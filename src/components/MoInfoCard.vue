@@ -25,7 +25,7 @@
 		<div class="contact-container">
 			<div class="contact-info"><span>联系我</span></div>
 			<div class="contact-ways">
-				<Icon>
+				<Icon @click="navigateTo('https://github.com/Jomorx')">
 					<GithubOutlined></GithubOutlined>
 				</Icon>
 				<Icon>
@@ -43,6 +43,7 @@
 import { Icon } from "@vicons/utils";
 import { GithubOutlined, QqCircleFilled, EnvironmentOutlined, WechatOutlined } from "@vicons/antd";
 import Avatar from "@/assets/avatar.gif";
+import { navigateTo } from "@/utils";
 </script>
 
 <style scoped lang="scss">
@@ -86,12 +87,6 @@ import Avatar from "@/assets/avatar.gif";
 		/* background-color: ; */
 	}
 
-	/* .avatar-line {
-                margin: 0 auto;
-                width: 90%;
-                border-bottom: 1px solid gray;
-            } */
-
 	.contact-container {
 		margin-top: 20px;
 		justify-content: space-around;
@@ -131,7 +126,10 @@ import Avatar from "@/assets/avatar.gif";
 				width: 2em;
 				height: 2em;
 				cursor: pointer;
-
+				&:hover {
+					transform: rotate(-360deg);
+					transition: transform 0.3s linear;
+				}
 				svg {
 					width: 100%;
 					height: 100%;

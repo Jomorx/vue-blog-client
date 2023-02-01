@@ -1,10 +1,9 @@
 <template>
-	<div class="home-container" ref="home">
+	<div class="home-container">
 		<div
-			v-for="item in articleList"
+			v-for="item in articleList?.rows"
 			@click="handlerClickArticle(item.articleId)"
 			class="article-container"
-			ref="articles"
 			:key="item.articleId"
 		>
 			<div class="image-container">
@@ -31,11 +30,19 @@
 				</div>
 
 				<div class="article-info">
-					<div class="view-count">
-						<Icon>
-							<EyeOutlined></EyeOutlined>
-						</Icon>
-						<span>{{ item.viewCount }}</span>
+					<div class="article-left">
+						<div class="view-count">
+							<Icon>
+								<EyeOutlined></EyeOutlined>
+							</Icon>
+							<span>{{ item.viewCount }}</span>
+						</div>
+						<div class="category">
+							<Icon>
+								<FolderOpenOutlined />
+							</Icon>
+							<span>{{ item.category.categoryName }}</span>
+						</div>
 					</div>
 					<div class="created-at">
 						<Icon>
@@ -50,53 +57,30 @@
 </template>
 
 <script setup lang="ts">
-import useWaterFall from "@/hooks/useWaterFall";
+import { useScrollToFetchData } from "@/hooks/useScrollToFetchData";
 import { Icon } from "@vicons/utils";
-import { onMounted, onUnmounted, ref, nextTick } from "vue";
-import { getArticleListApi } from "../api/article/ArticleApi";
+import { onMounted, onUnmounted } from "vue";
 import { getRandomInt } from "../utils";
-import { EyeOutlined, FieldTimeOutlined } from "@vicons/antd";
+import { EyeOutlined, FieldTimeOutlined, FolderOpenOutlined } from "@vicons/antd";
 import { useRouter } from "vue-router";
-import { Article } from "@/api/article";
 import appStore from "@/store";
+import { storeToRefs } from "pinia";
 const router = useRouter();
-const articleList = ref<Article[]>();
 const handlerClickArticle = (id: number) => {
 	router.push(`/article/${id}`);
 };
-const articles = ref<HTMLDivElement[]>();
-const home = ref<HTMLDivElement>();
-const articleInfo = ref({
-	pageSize: 10,
-	currentPage: 1,
-	searchText: "",
-});
-const { scrollFn, generateStart } = useWaterFall(
-	articles,
-	articleList,
-	articleInfo,
-	getArticleListApi
-);
-const { pageSize, currentPage, searchText } = articleInfo.value;
-const { articleStore } = appStore;
-const init = async () => {
-	const { data } = await getArticleListApi(pageSize, currentPage, searchText);
-	data.rows.forEach((item) => {
-		item.height = getRandomInt(100, 200);
-	});
-	articleList.value = data.rows;
-	nextTick(() => {
-		generateStart();
-	});
-};
+const { articleStore, tagStore } = appStore;
+const { articleList } = storeToRefs(articleStore);
+const { fetchArticleDataAction } = articleStore;
+
+const { scrollToFetchData } = useScrollToFetchData(fetchArticleDataAction);
 
 onMounted(() => {
-	init();
-
-	window.addEventListener("scroll", scrollFn);
+	fetchArticleDataAction();
+	window.addEventListener("scroll", scrollToFetchData);
 });
 onUnmounted(() => {
-	window.removeEventListener("scroll", scrollFn);
+	window.removeEventListener("scroll", scrollToFetchData);
 });
 </script>
 
@@ -155,7 +139,22 @@ onUnmounted(() => {
 			}
 			.article-info {
 				display: flex;
+				align-items: center;
 				justify-content: space-between;
+
+				.article-left {
+					display: flex;
+					align-items: center;
+					.view-count {
+						display: flex;
+						align-items: center;
+						margin-right: 20px;
+					}
+					.category {
+						display: flex;
+						align-items: center;
+					}
+				}
 			}
 		}
 	}

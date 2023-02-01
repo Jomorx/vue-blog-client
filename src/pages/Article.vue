@@ -42,12 +42,13 @@ import { Icon } from "@vicons/utils";
 import { FolderOpenOutlined, EyeOutlined } from "@vicons/antd";
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
-import { getArticleByIdApi } from "../api/article/ArticleApi";
-import { Article } from "@/api/article";
+import { getArticleByIdApi, incrementViewCount } from "../api/article/ArticleApi";
+import { IArticle } from "@/api/article";
 const route = useRoute();
-const article = ref<Article>();
+const article = ref<IArticle>();
 const { id } = route.params;
 const init = async () => {
+	await incrementViewCount(Number(id));
 	const res = await getArticleByIdApi(Number(id));
 	article.value = res.data;
 };
@@ -104,7 +105,7 @@ onMounted(() => {
 	.tag {
 		color: white;
 		padding: 5px 10px;
-		margin: 0 10px;
+		margin: 10px;
 		background-color: rgb(67, 109, 130);
 		border-radius: 10px;
 	}

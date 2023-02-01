@@ -1,8 +1,9 @@
-export type Article = {
+export type IArticle = {
 	articleId: number;
 	articleDescription: string;
 	articleCover: string;
 	articleTitle: string;
+	articleContent?: string;
 	category: {
 		categoryName: string;
 	};

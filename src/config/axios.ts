@@ -1,8 +1,10 @@
 import axios, { AxiosInstance } from "axios";
 import nprogress from "nprogress";
 import "nprogress/nprogress.css";
+console.log(import.meta.env.ENV_BASEURL);
+
 const request: AxiosInstance = axios.create({
-	baseURL: "http://47.113.204.79:3000",
+	baseURL: import.meta.env.ENV_BASEURL,
 	timeout: 6000,
 });
 

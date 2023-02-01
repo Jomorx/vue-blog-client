@@ -8,7 +8,7 @@
 					<div class="name">{{ item.friendChainName }}</div>
 					<div class="desc">{{ item.friendChainDescription }}</div>
 				</div>
-				<img class="avatar" :src="item.friendChainLink" alt="" />
+				<img class="avatar" :src="item.friendChainAvatar" alt="" />
 			</div>
 		</div>
 	</div>

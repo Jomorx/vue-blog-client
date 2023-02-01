@@ -5,13 +5,17 @@
 		</main>
 		<div class="right">
 			<MoInfoCard />
-			<div class="article-info-container"></div>
+			<div class="article-info-container">
+				<div class="tag-cloud">标签云</div>
+				<MoTagList />
+			</div>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
 import MoInfoCard from "@/components/MoInfoCard.vue";
+import MoTagList from "@/components/MoTagList.vue";
 </script>
 
 <style scoped lang="scss">
@@ -31,18 +35,17 @@ import MoInfoCard from "@/components/MoInfoCard.vue";
 
 		.article-info-container {
 			border-radius: 5px;
-			padding: 20px 0;
+			padding: 10px 5px;
 			background: var(--frBgColor);
-
 			text-align: center;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
 			margin-top: 20px;
 			font-weight: 500;
-			font-size: 16px;
+			font-size: 20px;
 			position: sticky;
 			top: 50px;
+			.tag-cloud {
+				padding: 10px 0;
+			}
 		}
 	}
 }
