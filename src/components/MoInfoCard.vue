@@ -18,7 +18,7 @@
 			<div class="technology-stack">
 				<span>前台:vue3 + naive</span>
 				<span>后台:react + antd</span>
-				<span>后端:nest.js + mysql</span>
+				<span>后端:nest.js + sequelize</span>
 			</div>
 		</div>
 

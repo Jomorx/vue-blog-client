@@ -14,8 +14,12 @@
 				v-for="(item, index) in logList"
 				:key="item.logId"
 			>
-				<span>{{ item.logContent }}</span>
-				<span v-time>{{ item.createdAt }}</span>
+				<div>
+					<span>{{ item.logContent }}</span>
+				</div>
+				<div class="log-time">
+					<span v-time>{{ item.createdAt }}</span>
+				</div>
 			</div>
 			<p class="clear-both"></p>
 		</div>
@@ -54,12 +58,16 @@ onMounted(init);
 		padding: 20px;
 		/* background-color: #e5e7eb; */
 		background-color: var(--seBgColor);
-
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 		min-height: 50px;
 		padding: 20px;
 		position: relative;
 		transition: transform 0.3s ease;
-
+		.log-time {
+			text-align: right;
+		}
 		//小三角
 		&::before {
 			content: "";

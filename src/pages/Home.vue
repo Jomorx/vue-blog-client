@@ -8,27 +8,40 @@
 			:key="item.articleId"
 		>
 			<div class="image-container">
-				<img :src="item.articleCover" alt="" lazy :style="{ height: item.height + 'px' }" />
+				<img :src="item.articleCover" alt="" lazy />
 			</div>
 			<div class="card-detail">
 				<div class="article-title">
-					<h1>{{ item.articleTitle }}</h1>
+					<h2>{{ item.articleTitle }}</h2>
 				</div>
-				<div class="article-content">
-					<span>{{ item.articleContent }}</span>
+				<div class="article-desc">
+					<span>{{ item.articleDescription }}</span>
 				</div>
+				<div class="article-tag">
+					<span
+						v-for="tag in item.tagList"
+						:key="tag.tagId"
+						class="tag"
+						:style="{
+							backgroundColor: `rgb(${getRandomInt()},${getRandomInt()},${getRandomInt()})`,
+						}"
+					>
+						{{ tag.tagName }}
+					</span>
+				</div>
+
 				<div class="article-info">
-					<div class="created-at">
-						<Icon>
-							<FieldTimeOutlined></FieldTimeOutlined>
-						</Icon>
-						<span v-time>{{ item.createdAt }}</span>
-					</div>
 					<div class="view-count">
 						<Icon>
 							<EyeOutlined></EyeOutlined>
 						</Icon>
 						<span>{{ item.viewCount }}</span>
+					</div>
+					<div class="created-at">
+						<Icon>
+							<FieldTimeOutlined></FieldTimeOutlined>
+						</Icon>
+						<span v-time>{{ item.createdAt }}</span>
 					</div>
 				</div>
 			</div>
@@ -46,7 +59,6 @@ import { EyeOutlined, FieldTimeOutlined } from "@vicons/antd";
 import { useRouter } from "vue-router";
 import { Article } from "@/api/article";
 import appStore from "@/store";
-import { storeToRefs } from "pinia";
 const router = useRouter();
 const articleList = ref<Article[]>();
 const handlerClickArticle = (id: number) => {
@@ -92,57 +104,58 @@ onUnmounted(() => {
 .home-container {
 	position: relative;
 	height: 100%;
-
 	.article-container {
-		position: absolute;
-		width: 30%;
 		cursor: pointer;
+		height: 190px;
+		width: 100%;
+		display: flex;
 		background: var(--frBgColor);
+		margin-bottom: 20px;
+		border-radius: 10px;
+		overflow: hidden;
+		transition: transform 0.3s linear;
+
+		&:hover {
+			transform: scale(1.05);
+		}
 		.image-container {
-			overflow: hidden;
+			width: 350px;
+
+			height: 100%;
 
 			img {
-				transition: transform 0.3s linear;
-
 				width: 100%;
-				&:hover {
-					transform: scale(1.1);
-				}
+				height: 100%;
 			}
 		}
-
 		.card-detail {
-			padding: 0 5px 5px 5px;
+			width: 100%;
+			padding: 10px 15px 10px 30px;
+			justify-content: space-around;
 			.article-title {
+				margin: 20px 0;
+			}
+			.article-desc {
+				margin-bottom: 20px;
+				height: 50px;
+			}
+			.article-tag {
+				margin-bottom: 10px;
+				.tag {
+					font-size: 12px;
+					color: white;
+					padding: 2px 5px;
+					margin-right: 10px;
+
+					border-radius: 5px;
+				}
+			}
+			.article-desc {
 				margin: 10px 0;
-
-				h1 {
-					font-weight: 700;
-					font-size: 17px;
-				}
 			}
-
-			.article-content {
-				margin: 8px 0;
-
-				span {
-					font-weight: 500;
-					font-size: 15px;
-					-webkit-box-orient: vertical;
-					display: -webkit-box;
-					overflow: hidden;
-					-webkit-line-clamp: 1;
-					text-overflow: ellipsis;
-				}
-			}
-
 			.article-info {
 				display: flex;
 				justify-content: space-between;
-
-				span {
-					margin-left: 10px;
-				}
 			}
 		}
 	}

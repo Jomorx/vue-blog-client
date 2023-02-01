@@ -10,6 +10,7 @@ declare module '@vue/runtime-core' {
     MoInfoCard: typeof import('./src/components/MoInfoCard.vue')['default']
     MoMarkdown: typeof import('./src/components/moMarkdown.vue')['default']
     NButton: typeof import('naive-ui')['NButton']
+    NConfigProvider: typeof import('naive-ui')['NConfigProvider']
     NInput: typeof import('naive-ui')['NInput']
     NNumberAnimation: typeof import('naive-ui')['NNumberAnimation']
     NSpace: typeof import('naive-ui')['NSpace']

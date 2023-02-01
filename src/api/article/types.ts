@@ -1,6 +1,6 @@
 export type Article = {
 	articleId: number;
-	articleContent: string;
+	articleDescription: string;
 	articleCover: string;
 	articleTitle: string;
 	category: {
