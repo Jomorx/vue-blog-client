@@ -6,15 +6,14 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
-import { getConfigByIdApi, IConfig } from "@/api/config";
+import { onMounted } from "vue";
 import moMarkdown from "@/components/moMarkdown.vue";
-const about = ref<IConfig>();
-const init = async () => {
-	const { data } = await getConfigByIdApi(1);
-	about.value = data;
-};
-onMounted(init);
+import appStore from "../store";
+import { storeToRefs } from "pinia";
+const { aboutStore } = appStore;
+const { about } = storeToRefs(aboutStore);
+const { fetchAboutListAction } = aboutStore;
+onMounted(fetchAboutListAction);
 </script>
 
 <style scoped lang="scss">

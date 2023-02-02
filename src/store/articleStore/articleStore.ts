@@ -20,7 +20,10 @@ export const useArticleStore = defineStore("article", () => {
 			});
 			articleList.value.count = data.count;
 			articleList.value.rows.push(...data.rows);
+			// 1 * 10  20
+			// 2 * 10  20
 		} else if (pageInfo.currentPage * pageInfo.pageSize < articleList.value.count) {
+			pageInfo.currentPage++;
 			const { data } = await getArticleListApi({
 				pageSize: pageInfo.pageSize,
 				currentPage: pageInfo.currentPage,

@@ -3,7 +3,12 @@
 		<div class="title"><span>友链</span></div>
 		<hr class="line" />
 		<div class="links">
-			<div class="link" v-for="(item, key) in friendChainList" :key="key">
+			<div
+				class="link"
+				v-for="(item, key) in friendChainList?.rows"
+				:key="key"
+				@click="navigateTo(item.friendChainLink)"
+			>
 				<div class="info">
 					<div class="name">{{ item.friendChainName }}</div>
 					<div class="desc">{{ item.friendChainDescription }}</div>
@@ -15,17 +20,14 @@
 </template>
 
 <script setup lang="ts">
-import { getFriendChainListApi, IFriendChain } from "../api/freindChain";
-import { onMounted, ref } from "vue";
-
-const friendChainList = ref<IFriendChain[]>([]);
-const init = async () => {
-	const { data } = await getFriendChainListApi(1, 10, "");
-	friendChainList.value = data.rows;
-};
-onMounted(() => {
-	init();
-});
+import { storeToRefs } from "pinia";
+import { onMounted } from "vue";
+import appStore from "@/store";
+import { navigateTo } from "@/utils";
+const { friendChainStore } = appStore;
+const { friendChainList } = storeToRefs(friendChainStore);
+const { fetchFriendChainListAction } = friendChainStore;
+onMounted(fetchFriendChainListAction);
 </script>
 
 <style scoped lang="scss">

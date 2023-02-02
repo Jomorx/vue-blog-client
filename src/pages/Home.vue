@@ -69,7 +69,7 @@ const router = useRouter();
 const handlerClickArticle = (id: number) => {
 	router.push(`/article/${id}`);
 };
-const { articleStore, tagStore } = appStore;
+const { articleStore } = appStore;
 const { articleList } = storeToRefs(articleStore);
 const { fetchArticleDataAction } = articleStore;
 
@@ -141,7 +141,9 @@ onUnmounted(() => {
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
-
+				.xicon {
+					margin-right: 5px;
+				}
 				.article-left {
 					display: flex;
 					align-items: center;

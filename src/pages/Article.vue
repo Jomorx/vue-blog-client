@@ -4,10 +4,7 @@
 			<h1 class="title">{{ article?.articleTitle }}</h1>
 			<div class="describe">
 				<div class="avatar">
-					<img
-						src="https://onecmshop.oss-cn-beijing.aliyuncs.com/avatar/202206016af6974df82147379a278aed05cf5cf7.jpg"
-						alt=""
-					/>
+					<img :src="article?.articleCover" alt="" />
 				</div>
 				<div class="category">
 					<Icon>
@@ -44,6 +41,7 @@ import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import { getArticleByIdApi, incrementViewCount } from "../api/article/ArticleApi";
 import { IArticle } from "@/api/article";
+import { url } from "inspector";
 const route = useRoute();
 const article = ref<IArticle>();
 const { id } = route.params;
@@ -63,6 +61,8 @@ onMounted(() => {
 	align-items: center;
 	flex-direction: column;
 	padding: 30px 0;
+	background-repeat: no-repeat;
+	background-size: contain;
 	.describe {
 		margin-top: 20px;
 		display: flex;
@@ -78,7 +78,7 @@ onMounted(() => {
 			img {
 				height: 100%;
 				width: 100%;
-				object-fit: contain;
+				object-fit: cover;
 			}
 		}
 		.xicon {

@@ -3,7 +3,7 @@
 		<div class="title"><span>做过的一些小项目</span></div>
 		<hr class="line" />
 		<div class="cards">
-			<div class="card" v-for="item in projectList" :key="item.projectId">
+			<div class="card" v-for="item in projectList?.rows" :key="item.projectId">
 				<div class="bg" :style="`background-image: url(${item.projectCover})`"></div>
 				<div class="shadow">
 					<div class="shadow-item">
@@ -22,24 +22,15 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
-import { getProjectListApi } from "../api/ProjectApi";
+import { onMounted } from "vue";
 import { navigateTo } from "../utils";
-interface IProject {
-	projectId: number;
-	projectName: string;
-	projectLink: string;
-	projectDescription: string;
-	projectCover: string;
-}
-const projectList = ref<IProject[]>([]);
-const init = async () => {
-	const { data } = await getProjectListApi<IProject>(1, 10, "");
-	projectList.value = data.rows;
-};
-
+import appStore from "../store";
+import { storeToRefs } from "pinia";
+const { projectStore } = appStore;
+const { projectList } = storeToRefs(projectStore);
+const { fetchProjectListAction } = projectStore;
 onMounted(() => {
-	init();
+	fetchProjectListAction();
 });
 </script>
 

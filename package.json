@@ -8,6 +8,7 @@
 		"preview": "vite preview",
 		"prettier": "prettier --write .",
 		"prepare": "husky install",
+		"lint": "eslint .",
 		"commit": "git-cz"
 	},
 	"dependencies": {

@@ -11,7 +11,7 @@
 					'item-left': index % 2 === 0,
 					'item-right': index % 2 !== 0,
 				}"
-				v-for="(item, index) in logList"
+				v-for="(item, index) in logList?.rows"
 				:key="item.logId"
 			>
 				<div>
@@ -27,18 +27,13 @@
 </template>
 
 <script setup lang="ts">
-import { getLogListApi, ILog } from "@/api/log";
-import { onMounted, ref } from "vue";
-const logList = ref<ILog[]>();
-const init = async () => {
-	const res = await getLogListApi({
-		currentPage: 1,
-		pageSize: 10,
-		searchText: "",
-	});
-	logList.value = res.data.rows;
-};
-onMounted(init);
+import appStore from "@/store";
+import { storeToRefs } from "pinia";
+import { onMounted } from "vue";
+const { logStore } = appStore;
+const { logList } = storeToRefs(logStore);
+const { fetchLogListAction } = logStore;
+onMounted(fetchLogListAction);
 </script>
 
 <style scoped lang="scss">
