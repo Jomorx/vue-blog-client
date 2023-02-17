@@ -2,12 +2,12 @@
 	<div class="tag-list">
 		<span
 			class="tag"
-			v-for="item in tagList?.rows"
-			:key="item.tagId"
+			v-for="tag in tagList?.rows"
+			:key="tag.tagId"
 			:style="{
-				backgroundColor: `rgb(${getRandomInt()},${getRandomInt()},${getRandomInt()})`,
+				backgroundColor: tag.tagColor,
 			}"
-			>{{ item.tagName }}</span
+			>{{ tag.tagName }}</span
 		>
 	</div>
 </template>
@@ -16,7 +16,6 @@
 import appStore from "@/store";
 import { storeToRefs } from "pinia";
 import { onMounted } from "vue";
-import { getRandomInt } from "@/utils";
 const { tagStore } = appStore;
 
 const { tagList } = storeToRefs(tagStore);

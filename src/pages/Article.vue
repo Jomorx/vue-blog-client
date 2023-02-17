@@ -26,8 +26,13 @@
 		<moMarkdown :content="article?.articleContent"></moMarkdown>
 		<div class="tag-container">
 			tags:
-			<div class="tag" v-for="item in article?.tagList" :key="item.tagId">
-				{{ item.tagName }}
+			<div
+				class="tag"
+				v-for="tag in article?.tagList"
+				:key="tag.tagId"
+				:style="{ background: tag.tagColor }"
+			>
+				{{ tag.tagName }}
 			</div>
 		</div>
 	</div>
@@ -106,7 +111,6 @@ onMounted(() => {
 		color: white;
 		padding: 5px 10px;
 		margin: 10px;
-		background-color: rgb(67, 109, 130);
 		border-radius: 10px;
 	}
 }

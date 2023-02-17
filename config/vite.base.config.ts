@@ -5,6 +5,8 @@ import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import { NaiveUiResolver } from "unplugin-vue-components/resolvers";
+import viteCompression from "vite-plugin-compression";
+
 const path = require("path");
 // import dynamicImportVars from '@rollup/plugin-dynamic-import-vars'
 export default defineConfig({
@@ -20,6 +22,9 @@ export default defineConfig({
 		}),
 		Components({
 			resolvers: [NaiveUiResolver()],
+		}),
+		viteCompression({
+			threshold: 1024 * 20, // 对大于 1mb 的文件进行压缩
 		}),
 	],
 	resolve: {

@@ -9,7 +9,7 @@ export type IArticle = {
 	};
 	createdAt: Date;
 	isTop: number;
-	tagList: { tagId: number; tagName: number }[];
+	tagList: { tagId: number; tagName: number; tagColor: string }[];
 	viewCount: number;
 	height: number;
 };

@@ -22,7 +22,7 @@
 						:key="tag.tagId"
 						class="tag"
 						:style="{
-							backgroundColor: `rgb(${getRandomInt()},${getRandomInt()},${getRandomInt()})`,
+							backgroundColor: tag.tagColor,
 						}"
 					>
 						{{ tag.tagName }}

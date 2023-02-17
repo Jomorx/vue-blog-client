@@ -1,5 +1,5 @@
 import moment from "moment";
-
+export * from "./markdownUtils";
 export const navigateTo = (url: string) => {
 	window.open(url);
 };
