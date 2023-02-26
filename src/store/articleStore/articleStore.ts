@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { reactive, ref } from "vue";
 import { getArticleListApi, getArticleTimeLineApi, IArticle, IArticleList } from "@/api/article";
 import { ReturnPageType, IReturnType } from "@/api/types";
+import { IArticleSideMenu } from "./types";
 
 export const useArticleStore = defineStore("article", () => {
 	// Home页面文章数据
@@ -40,11 +41,18 @@ export const useArticleStore = defineStore("article", () => {
 			articleTimeLine.value = res.data;
 		}
 	};
+
+	const articleSideMenu = ref<IArticleSideMenu[]>([]);
+	const changeArticleSideMenuAction = (heading: IArticleSideMenu[]) => {
+		articleSideMenu.value = heading;
+	};
 	return {
 		articleList,
 		fetchArticleDataAction,
 		pageInfo,
 		articleTimeLine,
 		fetchArticleTimeLineAction,
+		changeArticleSideMenuAction,
+		articleSideMenu,
 	};
 });

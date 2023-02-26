@@ -1,14 +1,17 @@
 <template>
 	<div class="tag-list">
-		<span
-			class="tag"
-			v-for="tag in tagList?.rows"
-			:key="tag.tagId"
-			:style="{
-				backgroundColor: tag.tagColor,
-			}"
-			>{{ tag.tagName }}</span
-		>
+		<n-popover trigger="hover" v-for="tag in tagList?.rows" :key="tag.tagId">
+			<template #trigger>
+				<span
+					class="tag"
+					:style="{
+						backgroundColor: tag.tagColor,
+					}"
+					>{{ tag.tagName }}</span
+				>
+			</template>
+			该标签下有{{ tag.articleCount }}个文章
+		</n-popover>
 	</div>
 </template>
 

@@ -39,22 +39,29 @@
 </template>
 
 <script setup lang="ts">
-import moMarkdown from "@/components/moMarkdown.vue";
+import moMarkdown from "@/components/MoMDContent.vue";
+
 import { Icon } from "@vicons/utils";
 import { FolderOpenOutlined, EyeOutlined } from "@vicons/antd";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { getArticleByIdApi, incrementViewCount } from "../api/article/ArticleApi";
 import { IArticle } from "@/api/article";
-import { url } from "inspector";
 const route = useRoute();
 const article = ref<IArticle>();
-const { id } = route.params;
 const init = async () => {
+	const { id } = route.params;
+
 	await incrementViewCount(Number(id));
 	const res = await getArticleByIdApi(Number(id));
 	article.value = res.data;
 };
+watch(
+	() => route.path,
+	() => {
+		init();
+	}
+);
 onMounted(() => {
 	init();
 });

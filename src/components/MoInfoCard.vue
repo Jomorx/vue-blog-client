@@ -23,17 +23,32 @@
 		</div>
 
 		<div class="contact-container">
-			<div class="contact-info"><span>联系我</span></div>
+			<div class="contact-info"><span>站点信息</span></div>
 			<div class="contact-ways">
-				<Icon @click="navigateTo('https://github.com/Jomorx')">
-					<GithubOutlined></GithubOutlined>
-				</Icon>
-				<Icon>
-					<QqCircleFilled></QqCircleFilled>
-				</Icon>
-				<Icon>
-					<WechatOutlined></WechatOutlined>
-				</Icon>
+				<div class="contact-item">
+					<div>
+						<Icon @click="navigateTo('https://github.com/Jomorx')">
+							<GithubOutlined></GithubOutlined>
+						</Icon>
+					</div>
+					<div>Github</div>
+				</div>
+				<div class="contact-item">
+					<div>
+						<Icon>
+							<WechatFilled></WechatFilled>
+						</Icon>
+					</div>
+					<div>微信</div>
+				</div>
+				<div class="contact-item">
+					<div>
+						<Icon>
+							<PieChartFilled />
+						</Icon>
+					</div>
+					<div>后台</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -41,7 +56,7 @@
 
 <script setup lang="ts">
 import { Icon } from "@vicons/utils";
-import { GithubOutlined, QqCircleFilled, EnvironmentOutlined, WechatOutlined } from "@vicons/antd";
+import { GithubOutlined, WechatFilled, EnvironmentOutlined, PieChartFilled } from "@vicons/antd";
 import Avatar from "@/assets/avatar.gif";
 import { navigateTo } from "@/utils";
 </script>
@@ -120,7 +135,12 @@ import { navigateTo } from "@/utils";
 		.contact-ways {
 			display: flex;
 			justify-content: space-around;
-			margin-top: 20px;
+			padding: 15px;
+			.contact-item {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+			}
 
 			.xicon {
 				width: 2em;

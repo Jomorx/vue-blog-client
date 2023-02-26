@@ -1,27 +1,28 @@
 <template>
-	<!-- <n-scrollbar style="max-height: 100vh"> -->
-	<div :class="{ dark: darkTheme }">
+	<n-config-provider :class="{ dark: dark }" :theme="theme">
 		<CommonHeader />
 		<CommonContent />
 		<button
 			@click="
 				() => {
-					darkTheme = !darkTheme;
+					dark = !dark;
+					theme = darkTheme;
 				}
 			"
 			class="themeBtn"
 		>
 			theme
 		</button>
-	</div>
-	<!-- </n-scrollbar> -->
+	</n-config-provider>
 </template>
 
 <script setup lang="ts">
 import CommonHeader from "./layouts/CommonHeader.vue";
 import CommonContent from "./layouts/CommonContent.vue";
 import { ref } from "vue";
-const darkTheme = ref(false);
+import { darkTheme } from "naive-ui";
+const dark = ref(false);
+const theme = ref<any>(null);
 </script>
 
 <style lang="scss">

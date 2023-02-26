@@ -4,18 +4,13 @@
 			<router-view></router-view>
 		</main>
 		<div class="right">
-			<MoInfoCard />
-			<div class="article-info-container">
-				<div class="tag-cloud">标签云</div>
-				<MoTagList />
-			</div>
+			<CommonAside />
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-import MoInfoCard from "@/components/MoInfoCard.vue";
-import MoTagList from "@/components/MoTagList.vue";
+import CommonAside from "@/layouts/CommonAside.vue";
 </script>
 
 <style scoped lang="scss">
@@ -32,21 +27,6 @@ import MoTagList from "@/components/MoTagList.vue";
 
 	.right {
 		width: 260px;
-
-		.article-info-container {
-			border-radius: 5px;
-			padding: 10px 5px;
-			background: var(--frBgColor);
-			text-align: center;
-			margin-top: 20px;
-			font-weight: 500;
-			font-size: 20px;
-			position: sticky;
-			top: 50px;
-			.tag-cloud {
-				padding: 10px 0;
-			}
-		}
 	}
 }
 </style>

@@ -12,3 +12,9 @@ export const getArticleByIdApi = (id: number): Promise<IReturnType<IArticle>> =>
 	request.get(`/article/getArticleById/${id}`);
 export const incrementViewCount = (id: number) =>
 	request.get<any, void>(`/article/viewArticle/${id}`);
+export const getArticleByKeyword = (keyword: string) =>
+	request.get<any, IReturnType<IArticle[]>>(`/article/getArticleByKeyword`, {
+		params: {
+			keyword,
+		},
+	});

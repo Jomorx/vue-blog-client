@@ -2,7 +2,7 @@
 	<header :class="{ 'hidden-header': isHidden, w: true }">
 		<div class="container w">
 			<div class="left">
-				<span @click="navigateTo('/')">Jomorx</span>
+				<span class="title" @click="navigateTo('/')">Jomorx</span>
 			</div>
 			<div class="right">
 				<div
@@ -16,15 +16,9 @@
 						{{ item.label }}
 					</span>
 				</div>
-				<n-space vertical class="search">
-					<n-input placeholder="" v-model:value="searchText">
-						<template #suffix>
-							<Icon class="search-icon">
-								<SearchOutlined />
-							</Icon>
-						</template>
-					</n-input>
-				</n-space>
+				<div class="search">
+					<MoSearch />
+				</div>
 			</div>
 		</div>
 	</header>
@@ -35,8 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { Icon } from "@vicons/utils";
-import { SearchOutlined } from "@vicons/antd";
+import MoSearch from "@/components/MoSearch.vue";
 import { ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 const router = useRouter();
@@ -79,7 +72,7 @@ const backTop = () => {
 		behavior: "smooth",
 	});
 };
-const searchText = ref<string>("");
+
 onMounted(() => {
 	window.addEventListener("scroll", () => {
 		let scrollTop =
@@ -115,21 +108,15 @@ header {
 
 		.left {
 			margin-left: 20px;
+			.title {
+				cursor: pointer;
+			}
 		}
 
 		.right {
 			display: flex;
 			height: 100%;
 			align-items: center;
-
-			.search {
-				border-color: blue;
-				margin: 0 40px;
-
-				.search-icon {
-					cursor: pointer;
-				}
-			}
 
 			.nav-item {
 				margin: 0 20px;
@@ -177,7 +164,13 @@ header {
 					color: green;
 				}
 			}
+			.search {
+				margin: 0 40px;
 
+				.search-icon {
+					cursor: pointer;
+				}
+			}
 			.nav-item:last-child {
 				margin-right: 20px;
 			}
@@ -201,6 +194,7 @@ header {
 	transition: height 0.4s ease;
 	cursor: pointer;
 	background-color: transparent;
+	z-index: 1000;
 }
 
 @keyframes back-top {
