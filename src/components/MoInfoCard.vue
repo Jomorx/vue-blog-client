@@ -33,14 +33,14 @@
 					</div>
 					<div>Github</div>
 				</div>
-				<div class="contact-item">
+				<!-- <div class="contact-item">
 					<div>
 						<Icon>
 							<WechatFilled></WechatFilled>
 						</Icon>
 					</div>
 					<div>微信</div>
-				</div>
+				</div> -->
 				<div class="contact-item">
 					<div>
 						<Icon>

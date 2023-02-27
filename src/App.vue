@@ -1,39 +1,27 @@
 <template>
-	<n-config-provider :class="{ dark: dark }" :theme="theme">
+	<n-config-provider :class="{ dark: isDark }" :theme="theme">
 		<CommonHeader />
 		<CommonContent />
-		<button
-			@click="
-				() => {
-					dark = !dark;
-					theme = darkTheme;
-				}
-			"
-			class="themeBtn"
-		>
-			theme
-		</button>
 	</n-config-provider>
 </template>
 
 <script setup lang="ts">
 import CommonHeader from "./layouts/CommonHeader.vue";
 import CommonContent from "./layouts/CommonContent.vue";
-import { ref } from "vue";
-import { darkTheme } from "naive-ui";
-const dark = ref(false);
-const theme = ref<any>(null);
+import { computed } from "vue";
+import { darkTheme, lightTheme } from "naive-ui";
+
+import appStore from "./store";
+import { storeToRefs } from "pinia";
+const { configStore } = appStore;
+const { isDark } = storeToRefs(configStore);
+const theme = computed(() => (isDark.value ? darkTheme : lightTheme));
 </script>
 
 <style lang="scss">
 body {
 	background: var(--seBgColor);
 	color: var(--color);
-}
-.themeBtn {
-	position: fixed;
-	bottom: 20px;
-	right: 40px;
 }
 // 版心
 .w {

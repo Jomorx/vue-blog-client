@@ -11,8 +11,6 @@
 				@search="deHandleSearchArticle"
 				@update:value="handleToArticle"
 			>
-				<!-- @keydown.enter="handleSearchArticle" -->
-
 				<template #empty>
 					<div></div>
 				</template>
@@ -44,9 +42,6 @@ const deHandleSearchArticle = _.debounce(handleSearchArticle, 1000);
 const handleToArticle = (articleId: any) => {
 	router.push(`/article/${articleId}`);
 };
-// const handleInput = (e: any) => {
-// 	searchText.value = e.target.value;
-// };
 </script>
 
 <style scoped lang="scss">

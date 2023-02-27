@@ -1,4 +1,6 @@
 <template>
+	<div class="tag-cloud">标签云</div>
+
 	<div class="tag-list">
 		<n-popover trigger="hover" v-for="tag in tagList?.rows" :key="tag.tagId">
 			<template #trigger>
@@ -29,6 +31,10 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+.tag-cloud {
+	padding: 10px 0;
+}
+
 .tag-list {
 	width: 100%;
 	display: flex;
