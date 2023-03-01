@@ -19,7 +19,7 @@ const props = withDefaults(
 const { articleStore } = appStore;
 const { changeArticleSideMenuAction } = articleStore;
 const toc = ref<{ id: string; level: number; raw: string; text: string }[]>([]);
-const html = ref("");
+const html = ref(marked(props.content));
 const renderer = new marked.Renderer();
 renderer.heading = (text, level, raw) => {
 	const id = Math.random();
@@ -31,18 +31,18 @@ renderer.heading = (text, level, raw) => {
 		  </h${level}>
 		`;
 };
+marked.setOptions({
+	renderer,
+	headerIds: false,
+	gfm: true,
+	breaks: true,
+	highlight: (code, lang) => {
+		return hljs.highlightAuto(code, [lang]).value;
+	},
+});
 watch(
 	() => props.content,
 	() => {
-		marked.setOptions({
-			renderer,
-			headerIds: false,
-			gfm: true,
-			breaks: true,
-			highlight: (code, lang) => {
-				return hljs.highlightAuto(code, [lang]).value;
-			},
-		});
 		toc.value = [];
 		html.value = marked(props.content);
 		changeArticleSideMenuAction(toc.value);

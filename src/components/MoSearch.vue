@@ -3,7 +3,7 @@
 		<n-space vertical>
 			<n-select
 				filterable
-				v-model:value="searchText"
+				placeholder="搜索本站文章"
 				:options="searchValue"
 				:loading="false"
 				clearable
@@ -32,11 +32,14 @@ import { SearchOutlined } from "@vicons/antd";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
-const searchText = ref("");
 const searchValue = ref<IArticle[]>([]);
 const handleSearchArticle = async (keyword: string) => {
-	const res = await getArticleByKeyword(keyword);
-	searchValue.value = res.data;
+	if (!keyword.trim().length) {
+		searchValue.value = [];
+	} else {
+		const res = await getArticleByKeyword(keyword);
+		searchValue.value = res.data;
+	}
 };
 const deHandleSearchArticle = _.debounce(handleSearchArticle, 1000);
 const handleToArticle = (articleId: any) => {

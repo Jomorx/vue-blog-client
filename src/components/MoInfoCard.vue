@@ -1,6 +1,8 @@
 <template>
 	<div class="info-card">
-		<img class="avatar" :src="Avatar" alt="" />
+		<div class="avatar">
+			<img :src="Avatar" alt="" />
+		</div>
 		<div class="author-info">
 			<div class="myname">
 				<span>Jomorx</span>
@@ -57,7 +59,7 @@
 <script setup lang="ts">
 import { Icon } from "@vicons/utils";
 import { GithubOutlined, WechatFilled, EnvironmentOutlined, PieChartFilled } from "@vicons/antd";
-import Avatar from "@/assets/avatar.gif";
+import Avatar from "@/assets/avatar.png";
 import { navigateTo } from "@/utils";
 </script>
 
@@ -75,8 +77,13 @@ import { navigateTo } from "@/utils";
 		padding-top: 20px;
 		width: 100px;
 		height: 100px;
-		border-radius: 50%;
 		margin-bottom: 10px;
+		margin: 0 auto;
+		img {
+			width: 100%;
+			height: 100%;
+			border-radius: 50%;
+		}
 	}
 
 	.author-info {
